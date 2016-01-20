@@ -20,12 +20,15 @@
         </activity>
         <activity
             android:name=".admin.AdminLoginActivity"
-            android:label="@string/title_activity_doctor_login"
+            android:label="@string/title_activity_admin_login"
             android:parentActivityName=".LandingPageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.conferencemanager.LandingPageActivity" />
         </activity>
+        <activity
+            android:name=".doctor.DoctorLoginActivity"
+            android:label="@string/title_activity_doctor_login"></activity>
     </application>
 
 </manifest>
