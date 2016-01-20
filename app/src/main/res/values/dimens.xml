@@ -3,4 +3,17 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <!--Dimensions used for buttons-->
+    <dimen name="standard_button_height">40dp</dimen>
+    <dimen name="standard_button_width">120dp</dimen>
+    <dimen name="button_elevation">10dp</dimen>
+    <dimen name="button_padding">8dp</dimen>
+    <dimen name="button_radius">2dp</dimen>
+    <!--Typography dimensions-->
+    <dimen name="Material.Text.Display1.Size">34sp</dimen>
+    <dimen name="Material.Text.Headline.Size">24sp</dimen>
+    <dimen name="Material.Text.Title.Size">20sp</dimen>
+    <dimen name="Material.Text.Subhead.Size">16sp</dimen>
+    <dimen name="Material.Text.Body1">14sp</dimen>
+    <dimen name="Material.Text.Regular">12sp</dimen>
 </resources>

@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">Conference Manager</string>
     <string name="action_settings">Settings</string>
+
+    <!--************************************Start of GENERAL section******************************* -->
+    <string name="landing_choose_type">Choose your type:</string>
+    <!--************************************End of GENERAL section******************************* -->
+
+
+    <!--************************************Start of ADMIN section******************************* -->
+
+    <!--Used in the Landing Page-->
+    <string name="landing_admin_button">Admin</string>
+
+    <!--************************************End of ADMIN section******************************* -->
+
+
+
+
+    <!--************************************Start of DOCTOR section******************************* -->
+    <string name="landing_doctor_button">Doctor</string>
+    <!--************************************End of ADMIN section******************************* -->
 </resources>
