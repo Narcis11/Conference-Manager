@@ -1,0 +1,169 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_signup_parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical"
+    tools:context="com.example.conferencemanager.admin.AdminSignUpActivity">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.87"
+        android:id="@+id/admin_signup_fields_layout"
+        android:layout_marginTop="@dimen/activity_six_square"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        tools:context="com.example.conferencemanager.admin.AdminSignUpActivity">
+
+        <!--*******Username fields********-->
+        <!--Username input field-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/admin_signup_username_value"
+            android:layout_marginLeft="@dimen/activity_vertical_margin_double"
+            android:layout_marginStart="@dimen/activity_vertical_margin_double"
+            android:layout_marginRight="@dimen/activity_vertical_margin_double"
+            android:layout_marginEnd="@dimen/activity_vertical_margin_double"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:hint="@string/admin_username_hint"
+            />
+    
+        <!--Username error-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/admin_signup_username_error"
+            android:visibility="invisible"
+            android:layout_below="@+id/admin_signup_username_value"
+            android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/activity_six_square"
+            android:layout_marginStart="@dimen/activity_six_square"
+            android:textColor="@color/colorAccent"
+            tools:text="Cannot be empty"/>
+    
+        <!--***************Password fields**********-->
+    
+        <!--Password input field-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/admin_signup_password_value"
+            android:inputType="textPassword"
+            android:layout_below="@+id/admin_signup_username_value"
+            android:layout_marginLeft="@dimen/activity_vertical_margin_double"
+            android:layout_marginStart="@dimen/activity_vertical_margin_double"
+            android:layout_marginRight="@dimen/activity_vertical_margin_double"
+            android:layout_marginEnd="@dimen/activity_vertical_margin_double"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/activity_vertical_margin_double"
+            android:hint="@string/admin_password_hint"/>
+    
+        <!--Confirm password error-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/admin_signup_password_error"
+            android:visibility="invisible"
+            android:layout_below="@+id/admin_signup_password_value"
+            android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/activity_six_square"
+            android:layout_marginStart="@dimen/activity_six_square"
+            android:textColor="@color/colorAccent"
+            tools:text="Cannot be empty"/>
+    
+        <!--***************CONFIRM Password fields**********-->
+    
+        <!--CONFIRM Password input field-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/admin_signup_confirm_password_value"
+            android:inputType="textPassword"
+            android:layout_below="@+id/admin_signup_password_value"
+            android:layout_marginLeft="@dimen/activity_vertical_margin_double"
+            android:layout_marginStart="@dimen/activity_vertical_margin_double"
+            android:layout_marginRight="@dimen/activity_vertical_margin_double"
+            android:layout_marginEnd="@dimen/activity_vertical_margin_double"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/activity_vertical_margin_double"
+            android:hint="@string/admin_confirm_password_hint"/>
+    
+        <!--CONFIRM Password error-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/admin_signup_confirm_password_error"
+            android:visibility="invisible"
+            android:layout_below="@+id/admin_signup_confirm_password_value"
+            android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/activity_six_square"
+            android:layout_marginStart="@dimen/activity_six_square"
+            android:textColor="@color/colorAccent"
+            tools:text="Cannot be empty"/>
+    
+    
+        <!--***************Email fields**********-->
+    
+        <!--Email input field-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/admin_signup_email_value"
+            android:inputType="textEmailAddress"
+            android:layout_below="@+id/admin_signup_confirm_password_value"
+            android:layout_marginLeft="@dimen/activity_vertical_margin_double"
+            android:layout_marginStart="@dimen/activity_vertical_margin_double"
+            android:layout_marginRight="@dimen/activity_vertical_margin_double"
+            android:layout_marginEnd="@dimen/activity_vertical_margin_double"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/activity_vertical_margin_double"
+            android:hint="@string/admin_email_hint"/>
+    
+        <!--Email error-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/admin_signup_email_error"
+            android:visibility="invisible"
+            android:layout_below="@+id/admin_signup_email_value"
+            android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/activity_six_square"
+            android:layout_marginStart="@dimen/activity_six_square"
+            android:textColor="@color/colorAccent"
+            tools:text="Cannot be empty"/>
+
+</RelativeLayout>
+
+    <!--************Next button************-->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.13"
+        android:id="@+id/admin_signup_button"
+        android:textSize="@dimen/Material.Text.Headline.Size"
+        android:text="@string/signup_button"
+        android:layout_below="@+id/admin_signup_fields_layout"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/button_selector_green"
+        android:padding="@dimen/activity_vertical_margin_half"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white" />
+</LinearLayout>
