@@ -22,7 +22,10 @@ public class UsersContract {
         //used for the content provider
         //content://com.example.conferencemanager/users
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_USERS).build();
-        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + COLUMN_USER_TYPE;
+        //vnd.android.cursor.dir/com.example.conferencemanager/users
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + PATH_USERS;
+        //vnd.android.cursor.item/com.example.conferencemanager/users
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_USERS;
         //used for manipulating a single row
         public static Uri buildUsersUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
