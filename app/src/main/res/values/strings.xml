@@ -26,6 +26,6 @@
 
     <!--************************************Start of DOCTOR section******************************* -->
     <string name="landing_doctor_button">Doctor</string>
-    <string name="title_activity_doctor_login">DoctorLoginActivity</string>
-    <!--************************************End of ADMIN section******************************* -->
+    <string name="title_activity_doctor_login">Log in</string>
+    <!--************************************End of DOCTOR section******************************* -->
 </resources>
