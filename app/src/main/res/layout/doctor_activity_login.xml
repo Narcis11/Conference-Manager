@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.conferencemanager.doctor.DoctorLoginActivity">
+
+    <!--***************Username fields***********-->
+
+    <!--Username input field-->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_login_username_value"
+        android:layout_marginLeft="@dimen/activity_vertical_margin_double"
+        android:layout_marginStart="@dimen/activity_vertical_margin_double"
+        android:layout_marginRight="@dimen/activity_vertical_margin_double"
+        android:layout_marginEnd="@dimen/activity_vertical_margin_double"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:hint="@string/doctor_username_hint"
+        android:layout_above="@+id/doctor_login_password_value"/>
+
+    <!--Username error-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_login_username_error"
+        android:visibility="invisible"
+        android:layout_below="@+id/doctor_login_username_value"
+        android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/activity_six_square"
+        android:layout_marginStart="@dimen/activity_six_square"
+        android:textColor="@color/colorAccent"
+        tools:text="Cannot be empty"/>
+
+    <!--***************Password fields**********-->
+
+    <!--Password input field-->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_login_password_value"
+        android:layout_marginLeft="@dimen/activity_vertical_margin_double"
+        android:layout_marginStart="@dimen/activity_vertical_margin_double"
+        android:layout_marginRight="@dimen/activity_vertical_margin_double"
+        android:layout_marginEnd="@dimen/activity_vertical_margin_double"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:layout_above="@+id/doctor_login_button"
+        android:layout_marginTop="@dimen/activity_vertical_margin_double"
+        android:inputType="textPassword"
+        android:hint="@string/doctor_password_hint"/>
+
+    <!--Password error-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_login_password_error"
+        android:visibility="invisible"
+        android:layout_below="@+id/doctor_login_password_value"
+        android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/activity_six_square"
+        android:layout_marginStart="@dimen/activity_six_square"
+        android:textColor="@color/colorAccent"
+        tools:text="Cannot be empty"/>
+
+    <!--********Log in button*****-->
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:elevation="@dimen/button_elevation"
+        android:id="@+id/doctor_login_button"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/button_padding"
+        android:paddingRight="@dimen/button_padding"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin_double"
+        tools:text="Log in"
+        android:text="@string/login_button"
+        android:textSize="@dimen/Material.Text.Headline.Size"
+        android:background="@drawable/button_selector_green"/>
+
+</RelativeLayout>
