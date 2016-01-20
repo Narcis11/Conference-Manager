@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.conferencemanager.admin.AdminLoginActivity;
+import com.example.conferencemanager.doctor.DoctorLoginActivity;
 
 public class LandingPageActivity extends AppCompatActivity {
 
@@ -33,10 +34,22 @@ public class LandingPageActivity extends AppCompatActivity {
             }
         });
 
+        mDoctorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDoctorLoginActivity();
+            }
+        });
+
     }
 
     private void openAdminLoginActivity() {
         Intent adminIntent = new Intent(this, AdminLoginActivity.class);
+        startActivity(adminIntent);
+    }
+
+    private void openDoctorLoginActivity() {
+        Intent adminIntent = new Intent(this, DoctorLoginActivity.class);
         startActivity(adminIntent);
     }
 

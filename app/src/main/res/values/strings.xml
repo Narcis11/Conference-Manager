@@ -21,12 +21,23 @@
     <string name="admin_username_hint">Username</string>
     <string name="admin_password_hint">Password</string>
     <string name="admin_login_new_user">First time using this app?</string>
+
+    <!--Activity titles-->
+    <string name="title_activity_admin_login">Log in</string>
     <!--************************************End of ADMIN section******************************* -->
 
 
     <!--************************************Start of DOCTOR section******************************* -->
+
+    <!--Used in the Landing Page-->
     <string name="landing_doctor_button">Doctor</string>
-    <string name="title_activity_admin_login">Log in</string>
+
+    <!--Used in the Login Page-->
+    <string name="doctor_username_hint">Username</string>
+    <string name="doctor_password_hint">Password</string>
+    <string name="doctor_login_new_user">First time using this app?</string>
+
+    <!--Activity titles-->
     <string name="title_activity_doctor_login">Log in</string>
     <!--************************************End of DOCTOR section******************************* -->
 </resources>
