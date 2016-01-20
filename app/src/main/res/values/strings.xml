@@ -3,7 +3,12 @@
     <string name="action_settings">Settings</string>
 
     <!--************************************Start of GENERAL section******************************* -->
+    <!--Used in the landing page-->
     <string name="landing_choose_type">Choose your type:</string>
+
+    <!--Used in the log in/sign up pages-->
+    <string name="login_button">Log in</string>
+    <string name="signup_button">Sign up</string>
     <!--************************************End of GENERAL section******************************* -->
 
 
@@ -12,12 +17,15 @@
     <!--Used in the Landing Page-->
     <string name="landing_admin_button">Admin</string>
 
+    <!--Used in the Login Page-->
+    <string name="admin_username_hint">Username</string>
+    <string name="admin_password_hint">Password</string>
+    <string name="admin_login_new_user">First time using this app?</string>
     <!--************************************End of ADMIN section******************************* -->
-
-
 
 
     <!--************************************Start of DOCTOR section******************************* -->
     <string name="landing_doctor_button">Doctor</string>
+    <string name="title_activity_doctor_login">DoctorLoginActivity</string>
     <!--************************************End of ADMIN section******************************* -->
 </resources>
