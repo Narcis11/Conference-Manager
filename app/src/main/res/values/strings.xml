@@ -8,7 +8,6 @@
 
     <!--Used in the log in/sign up pages-->
     <string name="login_button">Log in</string>
-    <string name="signup_button">Sign up</string>
     <string name="no_input">Please complete the field above</string>
     <!--************************************End of GENERAL section******************************* -->
 
@@ -36,7 +35,6 @@
     <!--Used in the Login Page-->
     <string name="doctor_username_hint">Username</string>
     <string name="doctor_password_hint">Password</string>
-    <string name="doctor_login_new_user">First time using this app?</string>
 
     <!--Activity titles-->
     <string name="title_activity_doctor_login">Log in</string>
