@@ -28,9 +28,11 @@
     <!--Used in the sign up page-->
     <string name="admin_confirm_password_hint">Confirm password</string>
     <string name="admin_email_hint">Email</string>
+    <string name="admin_registration_invalid_email">The email you have entered is invalid.</string>
+    <string name="admin_signup_password_mismatch">The passwords do not match.</string>
     <!--Activity titles-->
-    <string name="title_activity_admin_login">Log in</string>
-    <string name="title_activity_admin_sign_up">Sign Up</string>
+    <string name="title_activity_admin_login">Admin log in</string>
+    <string name="title_activity_admin_sign_up">Admin sign Up</string>
     <!--************************************End of ADMIN section******************************* -->
 
 
@@ -44,6 +46,6 @@
     <string name="doctor_password_hint">Password</string>
 
     <!--Activity titles-->
-    <string name="title_activity_doctor_login">Log in</string>
+    <string name="title_activity_doctor_login">Doctor log in</string>
     <!--************************************End of DOCTOR section******************************* -->
 </resources>

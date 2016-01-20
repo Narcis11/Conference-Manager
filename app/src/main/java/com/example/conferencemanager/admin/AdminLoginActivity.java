@@ -1,6 +1,7 @@
 package com.example.conferencemanager.admin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,7 +54,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         mPasswordEditText = (EditText) findViewById(R.id.admin_login_password_value);
         //the buttons
         mLogInButton = (Button) findViewById(R.id.admin_login_button);
-        mSignUpButton = (Button) findViewById(R.id.admin_login_button);
+        mSignUpButton = (Button) findViewById(R.id.admin_login_signup_button);
         //the error fields
         mUsernameError = (TextView) findViewById(R.id.admin_login_username_error);
         mPasswordError = (TextView) findViewById(R.id.admin_login_password_error);
@@ -72,14 +73,14 @@ public class AdminLoginActivity extends AppCompatActivity {
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //openSignUpActivity();
+                openSignUpActivity();
             }
         });
     }
 
     private void openSignUpActivity() {
-        //Intent buyerIntent = new Intent(this, BuyerSignUpActivity.class);
-        //startActivity(buyerIntent);
+        Intent buyerIntent = new Intent(this, AdminSignUpActivity.class);
+        startActivity(buyerIntent);
     }
     /****************************END OF onClick METHODS****************************/
 
