@@ -9,6 +9,7 @@
     <!--Used in the log in/sign up pages-->
     <string name="login_button">Log in</string>
     <string name="signup_button">Sign up</string>
+    <string name="no_input">Please complete the field above</string>
     <!--************************************End of GENERAL section******************************* -->
 
 
