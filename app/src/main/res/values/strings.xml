@@ -25,8 +25,12 @@
     <string name="admin_password_hint">Password</string>
     <string name="admin_login_new_user">First time using this app?</string>
 
+    <!--Used in the sign up page-->
+    <string name="admin_confirm_password_hint">Confirm password</string>
+    <string name="admin_email_hint">Email</string>
     <!--Activity titles-->
     <string name="title_activity_admin_login">Log in</string>
+    <string name="title_activity_admin_sign_up">Sign Up</string>
     <!--************************************End of ADMIN section******************************* -->
 
 

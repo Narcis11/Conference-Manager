@@ -34,6 +34,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.conferencemanager.LandingPageActivity" />
         </activity>
+        <activity
+            android:name=".admin.AdminSignUpActivity"
+            android:label="@string/title_activity_admin_sign_up"
+            android:parentActivityName=".admin.AdminLoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.conferencemanager.admin.AdminLoginActivity" />
+        </activity>
     </application>
 
 </manifest>
