@@ -11,6 +11,7 @@
     <!--Dimensions used for buttons-->
     <dimen name="standard_button_height">40dp</dimen>
     <dimen name="standard_button_width">120dp</dimen>
+    <dimen name="button_width_small_one">80dp</dimen>
     <dimen name="button_elevation">10dp</dimen>
     <dimen name="button_padding">8dp</dimen>
     <dimen name="button_radius">2dp</dimen>

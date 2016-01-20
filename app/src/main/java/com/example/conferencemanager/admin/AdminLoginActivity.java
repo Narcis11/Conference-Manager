@@ -25,6 +25,7 @@ public class AdminLoginActivity extends AppCompatActivity {
     private EditText mPasswordEditText;
     //the button used
     private Button mLogInButton;
+    private Button mSignUpButton;
     //the error textviews
     private TextView mUsernameError;
     private TextView mPasswordError;
@@ -52,6 +53,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         mPasswordEditText = (EditText) findViewById(R.id.admin_login_password_value);
         //the buttons
         mLogInButton = (Button) findViewById(R.id.admin_login_button);
+        mSignUpButton = (Button) findViewById(R.id.admin_login_button);
         //the error fields
         mUsernameError = (TextView) findViewById(R.id.admin_login_username_error);
         mPasswordError = (TextView) findViewById(R.id.admin_login_password_error);
@@ -67,8 +69,18 @@ public class AdminLoginActivity extends AppCompatActivity {
             }
         });
 
+        mSignUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //openSignUpActivity();
+            }
+        });
     }
 
+    private void openSignUpActivity() {
+        //Intent buyerIntent = new Intent(this, BuyerSignUpActivity.class);
+        //startActivity(buyerIntent);
+    }
     /****************************END OF onClick METHODS****************************/
 
     /*****************************START OF CHECK METHODS*****************************/

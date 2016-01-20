@@ -71,8 +71,8 @@
 
     <!--********Log in button*****-->
     <Button
-        android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/standard_button_width"
+        android:layout_height="@dimen/standard_button_height"
         android:elevation="@dimen/button_elevation"
         android:id="@+id/admin_login_button"
         android:textColor="@color/white"
@@ -81,9 +81,38 @@
         android:paddingRight="@dimen/button_padding"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/activity_vertical_margin_double"
-        tools:text="Log in"
         android:text="@string/login_button"
         android:textSize="@dimen/Material.Text.Headline.Size"
         android:background="@drawable/button_selector_green"/>
 
+    <!--**************Sign up elements**************-->
+
+    <!--New user textview-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_login_newuser"
+        android:text="@string/admin_login_new_user"
+        android:textSize="@dimen/Material.Text.Title.Size"
+        android:textColor="@color/black"
+        android:layout_above="@+id/admin_login_signup_button"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_centerHorizontal="true" />
+
+    <!--Sign up-->
+    <Button
+        android:layout_width="@dimen/button_width_small_one"
+        android:layout_height="@dimen/standard_button_height"
+        android:id="@+id/admin_login_signup_button"
+        android:elevation="@dimen/button_elevation"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/button_padding_half"
+        android:paddingRight="@dimen/button_padding_half"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:text="@string/signup_button"
+        android:textSize="@dimen/Material.Text.Subhead.Size"
+        android:background="@drawable/button_selector_green"/>
 </RelativeLayout>
