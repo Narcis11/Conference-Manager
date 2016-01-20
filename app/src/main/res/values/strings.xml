@@ -32,8 +32,8 @@
     <string name="admin_signup_password_mismatch">The passwords do not match.</string>
     <string name="admin_signup_short_password">The password must be at least seven characters long.</string>
     <!--Activity titles-->
-    <string name="title_activity_admin_login">Admin log in</string>
-    <string name="title_activity_admin_sign_up">Admin sign up</string>
+    <string name="title_activity_admin_login">Admin Log In</string>
+    <string name="title_activity_admin_sign_up">Admin Sign Up</string>
     <!--************************************End of ADMIN section******************************* -->
 
 
@@ -47,6 +47,6 @@
     <string name="doctor_password_hint">Password</string>
 
     <!--Activity titles-->
-    <string name="title_activity_doctor_login">Doctor log in</string>
+    <string name="title_activity_doctor_login">Doctor Log In</string>
     <!--************************************End of DOCTOR section******************************* -->
 </resources>
