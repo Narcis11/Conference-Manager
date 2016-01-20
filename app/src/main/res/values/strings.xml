@@ -30,9 +30,10 @@
     <string name="admin_email_hint">Email</string>
     <string name="admin_registration_invalid_email">The email you have entered is invalid.</string>
     <string name="admin_signup_password_mismatch">The passwords do not match.</string>
+    <string name="admin_signup_short_password">The password must be at least seven characters long.</string>
     <!--Activity titles-->
     <string name="title_activity_admin_login">Admin log in</string>
-    <string name="title_activity_admin_sign_up">Admin sign Up</string>
+    <string name="title_activity_admin_sign_up">Admin sign up</string>
     <!--************************************End of ADMIN section******************************* -->
 
 
