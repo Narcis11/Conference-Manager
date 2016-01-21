@@ -56,7 +56,7 @@ public class UsersContract {
         public static final String TABLE_NAME = "topics";
         public static final String COLUMN_TOPIC_TITLE = "topic_title";//text
         public static final String COLUMN_TOPIC_DESCRIPTION = "topic_description";//text
-        public static final String COLUMN_TOPIC_ADDEDD_BY = "topic_added_by";//text
+        public static final String COLUMN_TOPIC_ADDED_BY = "topic_added_by";//text
 
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_TOPICS).build();
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + PATH_TOPICS;

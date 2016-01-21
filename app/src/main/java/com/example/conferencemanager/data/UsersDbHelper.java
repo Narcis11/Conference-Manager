@@ -33,8 +33,15 @@ public class UsersDbHelper extends SQLiteOpenHelper {
                 UsersContract.ConferencesEntry.COLUMN_CONF_DATE + " TEXT, " +
                 UsersContract.ConferencesEntry.COLUMN_CONF_ADDRESS + " TEXT " + ");";
 
+        final String SQL_CREATE_TOPICS_TABLE = "CREATE TABLE " + UsersContract.TopicsEntry.TABLE_NAME + " (" +
+                UsersContract.TopicsEntry._ID + " INTEGER PRIMARY KEY, " +
+                UsersContract.TopicsEntry.COLUMN_TOPIC_TITLE + " TEXT, " +
+                UsersContract.TopicsEntry.COLUMN_TOPIC_DESCRIPTION + " TEXT, " +
+                UsersContract.TopicsEntry.COLUMN_TOPIC_ADDED_BY + " TEXT " + ");";
+
         db.execSQL(SQL_CREATE_USERS_TABLE);
         db.execSQL(SQL_CREATE_CONFERENCES_TABLE);
+        db.execSQL(SQL_CREATE_TOPICS_TABLE);
     }
 
     @Override
