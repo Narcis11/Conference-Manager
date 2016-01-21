@@ -4,6 +4,28 @@
     android:layout_height="match_parent"
     tools:context="com.example.conferencemanager.admin.AdminConferencesFragment">
 
+    <!--The conferences listview-->
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:id="@+id/admin_conferences_listview"
+        android:dividerHeight="@dimen/activity_vertical_margin_half"
+        android:divider="@color/material_grey_300"/>
+
+    <!--No orders textview-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_conferences_no_rows"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:visibility="gone"
+        android:textColor="@color/colorAccent"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:text="@string/admin_no_conferences"/>
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/admin_fab"
         android:layout_width="wrap_content"

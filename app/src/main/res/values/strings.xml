@@ -38,6 +38,9 @@
     <!--Used in the Landing Page-->
     <string name="landing_admin_button">Admin</string>
 
+    <!--Used in the Conferences fragment-->
+    <string name="admin_no_conferences">There are no conferences to display. Click the plus button to schedule a conference.</string>
+
     <!--Activity/framgment titles-->
     <string name="title_activity_admin_login">Admin Log In</string>
     <string name="title_activity_admin_sign_up">Admin Sign Up</string>
