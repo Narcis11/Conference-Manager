@@ -49,8 +49,6 @@ public class AdminSignUpActivity extends AppCompatActivity {
     private Button mSignUpButton;
     //generic error message
     private static String EMPTY_FIELD_ERROR = "";
-    //the dialog displayed when checking the username
-    ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,7 +181,6 @@ public class AdminSignUpActivity extends AppCompatActivity {
     private void checkAllFields() {
         if (checkUsernameField() && checkPasswordField() && checkConfirmPasswordField() && checkEmailField()) {
             Log.i(LOG_TAG, "Ready to sign up");
-            displayDialog();
             new CheckUsernameAvailability().execute(mUsernameEditText.getText().toString());
         }
         else {
@@ -231,7 +228,6 @@ public class AdminSignUpActivity extends AppCompatActivity {
             Log.i(LOG_TAG,"cursorCount: " + cursorCount);
             if (cursorCount == 0) {
                 //Log.i(LOG_TAG, "The user does not exist, proceed further");
-                cancelDialog();
                 //save the new user
                 final String USER_TYPE = "Admin";
                 Vector<ContentValues> cVVector = new Vector<>(3);
@@ -245,7 +241,6 @@ public class AdminSignUpActivity extends AppCompatActivity {
                 new SaveUsernameAsync().execute(cVVector);
             }
             else {
-                cancelDialog();
                 AlertDialog.Builder builder = new AlertDialog.Builder(AdminSignUpActivity.this);
                 builder.setMessage(R.string.signup_user_exists)
                         .setTitle(R.string.generic_error_occurred)
@@ -268,7 +263,6 @@ public class AdminSignUpActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer rowsInserted) {
             Log.i(LOG_TAG,"rowsInserted: " + rowsInserted);
-            cancelDialog();
             if (rowsInserted == 1) {
                 Intent mainActivityIntent = new Intent(AdminSignUpActivity.this, AdminMainActivity.class);
                 //clear the intent stack so that the user can't return to this activity
@@ -289,20 +283,4 @@ public class AdminSignUpActivity extends AppCompatActivity {
     }
 
     /*****************************************END OF DATABASE METHODS*************************************/
-
-    /**************************START OF DIALOG METHODS*****************************/
-    private void displayDialog() {
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setMessage(getResources().getString(R.string.signup_user_check));
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setCancelable(false); //don't allow the user to cancel the dialog
-        mProgressDialog.show();
-    }
-
-    private void cancelDialog() {
-        if (mProgressDialog != null ) mProgressDialog.dismiss();
-    }
-    /**************************END OF DIALOG METHODS*****************************/
-
 }
