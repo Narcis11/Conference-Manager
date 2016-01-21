@@ -36,13 +36,15 @@ public class AdminConferencesFragment extends Fragment implements LoaderManager.
             UsersContract.ConferencesEntry.TABLE_NAME + "." + UsersContract.ConferencesEntry._ID,
             UsersContract.ConferencesEntry.COLUMN_CONF_TITLE,
             UsersContract.ConferencesEntry.COLUMN_CONF_ADDRESS,
-            UsersContract.ConferencesEntry.COLUMN_CONF_DATE
+            UsersContract.ConferencesEntry.COLUMN_CONF_DATE,
+            UsersContract.ConferencesEntry.COLUMN_CONF_DESCRIPTION
     };
     //indices for each column
     private static final int COL_CONF_ID = 0;
     private static final int COL_CONF_TITLE = 1;
     private static final int COL_CONF_ADDRESS = 2;
     private static final int COL_CONF_DATE = 3;
+    private static final int COL_CONF_DESCRIPTION = 4;
     //loader identifier
     private static final int CONFERENCES_LOADER_ID = 1;
 
@@ -110,8 +112,10 @@ public class AdminConferencesFragment extends Fragment implements LoaderManager.
                 if (cursor != null && cursor.moveToPosition(position)) {
                     Intent detailsIntent = new Intent(getActivity(), AdminConferenceDetailsActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putInt(Constants.BUNDLE_ADMIN_CONF_ID_KEY, cursor.getInt(COL_CONF_ID));
                     bundle.putString(Constants.BUNDLE_ADMIN_CONF_TITLE_KEY, cursor.getString(COL_CONF_TITLE));
+                    bundle.putString(Constants.BUNDLE_ADMIN_CONF_ADDRESS_KEY, cursor.getString(COL_CONF_ADDRESS));
+                    bundle.putString(Constants.BUNDLE_ADMIN_CONF_DESCRIPTION_KEY, cursor.getString(COL_CONF_DESCRIPTION));
+                    bundle.putString(Constants.BUNDLE_ADMIN_CONF_DATE_KEY, cursor.getString(COL_CONF_DATE));
                     detailsIntent.putExtras(bundle);
                     startActivity(detailsIntent);
 

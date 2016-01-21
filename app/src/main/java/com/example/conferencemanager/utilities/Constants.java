@@ -21,6 +21,9 @@ public class Constants {
     //used in bundle communications
     public static final String BUNDLE_ADMIN_CONF_TITLE_KEY = "bundle_admin_conf_title_key";
     public static final String BUNDLE_ADMIN_CONF_ID_KEY = "bundle_admin_conf_id_key";
+    public static final String BUNDLE_ADMIN_CONF_ADDRESS_KEY = "bundle_admin_conf_address_key";
+    public static final String BUNDLE_ADMIN_CONF_DATE_KEY = "bundle_admin_conf_date_key";
+    public static final String BUNDLE_ADMIN_CONF_DESCRIPTION_KEY = "bundle_admin_conf_description_key";
 
     /*********************************USED FOR THE DOCTOR SIDE***********************************/
     //used to determine whether the doctor is already logged in
