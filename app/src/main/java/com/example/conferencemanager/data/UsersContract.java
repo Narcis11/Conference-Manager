@@ -14,6 +14,7 @@ public class UsersContract {
     public static final String PATH_USERS = "users";
     public static final String PATH_CONFERENCES = "conferences";
     public static final String PATH_TOPICS = "topics";
+    public static final String PATH_INVITES = "invites";
 
     public static final class UsersEntry implements BaseColumns {
         public static final String TABLE_NAME = "users";
@@ -63,6 +64,21 @@ public class UsersContract {
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_TOPICS;
         public static final String SORT_ORDER = COLUMN_TOPIC_TITLE + " ASC";
         public static Uri buildTopicsUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
+
+    public static final class InvitesEntry implements BaseColumns {
+        public static final String TABLE_NAME = "invites";
+        public static final String COLUMN_RECIPIENT = "recipient";//text
+        public static final String COLUMN_SENDER = "sender";//text
+        public static final String COLUMN_CONF_NAME = "conference_name";//text
+
+        public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_INVITES).build();
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + PATH_INVITES;
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_INVITES;
+        public static final String SORT_ORDER = COLUMN_CONF_NAME + " ASC";
+        public static Uri buildInvitesUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
