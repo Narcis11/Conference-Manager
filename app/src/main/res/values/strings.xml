@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Conference Manager</string>
     <string name="action_settings">Settings</string>
-
+    <string name="content_authority">com.example.conferencemanager</string>
     <!--************************************Start of GENERAL section******************************* -->
     <!--Used in the landing page-->
     <string name="landing_choose_type">Choose your type:</string>

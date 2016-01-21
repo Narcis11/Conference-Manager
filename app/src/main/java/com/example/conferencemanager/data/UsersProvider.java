@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Created by Narcis11 on 21/01/2016.
@@ -66,6 +67,7 @@ public class UsersProvider extends ContentProvider {
         final SQLiteDatabase sqLiteDatabase = mUsersHelper.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
         Uri returnUri;
+        Log.i(LOG_TAG,"In insert, uri/match : " + uri.toString() + "/" + match);
         switch (match) {
             case USERS: {
                 long _id = sqLiteDatabase.insert(UsersContract.UsersEntry.TABLE_NAME, null, values);
