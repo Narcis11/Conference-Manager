@@ -37,8 +37,6 @@ public class AdminSignUpActivity extends AppCompatActivity {
     private EditText mPasswordEditText;
     private EditText mConfirmPasswordEditText;
     private EditText mEmailEditText;
-    //the edit text values
-    private String mPasswordValue;
     //the error messages
     private TextView mUsernameError;
     private TextView mPasswordError;

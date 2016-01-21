@@ -58,7 +58,12 @@
             android:label="@string/title_activity_doctor_main" />
         <activity
             android:name=".doctor.DoctorSignUpActivity"
-            android:label="@string/title_activity_doctor_sign_up"></activity>
+            android:label="@string/title_activity_doctor_sign_up"
+            android:parentActivityName=".doctor.DoctorLoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.conferencemanager.doctor.DoctorLoginActivity" />
+        </activity>
     </application>
 
 </manifest>
