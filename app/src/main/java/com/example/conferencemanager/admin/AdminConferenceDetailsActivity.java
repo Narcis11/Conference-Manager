@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,7 +14,7 @@ import android.widget.TextView;
 import com.example.conferencemanager.R;
 import com.example.conferencemanager.utilities.Constants;
 
-public class AdminConferenceDetailsActivity extends AppCompatActivity implements AdminConferenceDetailsFragment.OnFragmentInteractionListener{
+public class AdminConferenceDetailsActivity extends AppCompatActivity{
 
     private static final String FRAGMENT_TAG = "AdminConferenceDetailsFragment";
     private static final String LOG_TAG = AdminConferenceDetailsActivity.class.getSimpleName();
@@ -56,8 +58,21 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.admin_menu_conf_details, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_edit_conf) {
+            Log.i(LOG_TAG,"Clicked on the edit button");
+        }
+        else if (id == R.id.action_delete_conf) {
+            Log.i(LOG_TAG,"Clicked on the delete button");
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**********************************************************START OF UI METHODS****************************************************************/

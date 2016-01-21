@@ -41,11 +41,13 @@
     <!--Used in the Conferences fragment-->
     <string name="admin_no_conferences">There are no conferences to display. Click the plus button to schedule a conference.</string>
 
-    <!--Used in the Conference details fragment-->
+    <!--Used in the Conference details activity-->
     <string name="admin_conf_details_title">Title</string>
     <string name="admin_conf_details_description">Details</string>
     <string name="admin_conf_details_address">Address</string>
     <string name="admin_conf_details_date">Date</string>
+    <string name="admin_edit_conf">Edit conference</string>
+    <string name="admin_delete_conf">Delete conference</string>
     <!--Activity/framgment titles-->
     <string name="title_activity_admin_login">Admin Log In</string>
     <string name="title_activity_admin_sign_up">Admin Sign Up</string>
