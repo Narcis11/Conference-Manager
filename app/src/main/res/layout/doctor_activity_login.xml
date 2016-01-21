@@ -90,4 +90,35 @@
         android:textSize="@dimen/Material.Text.Headline.Size"
         android:background="@drawable/button_selector_green"/>
 
+    <!--**************Sign up elements**************-->
+
+    <!--New user textview-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_login_newuser"
+        android:text="@string/login_new_user"
+        android:textSize="@dimen/Material.Text.Title.Size"
+        android:textColor="@color/black"
+        android:layout_above="@+id/doctor_login_signup_button"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_centerHorizontal="true" />
+
+    <!--Sign up-->
+    <Button
+        android:layout_width="@dimen/button_width_small_one"
+        android:layout_height="@dimen/standard_button_height"
+        android:id="@+id/doctor_login_signup_button"
+        android:elevation="@dimen/button_elevation"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/button_padding_half"
+        android:paddingRight="@dimen/button_padding_half"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:text="@string/signup_button"
+        android:textSize="@dimen/Material.Text.Subhead.Size"
+        android:background="@drawable/button_selector_green"/>
+    
 </RelativeLayout>

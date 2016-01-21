@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.conferencemanager.R;
+import com.example.conferencemanager.admin.AdminSignUpActivity;
 import com.example.conferencemanager.data.UsersContract;
 import com.example.conferencemanager.utilities.Constants;
 import com.example.conferencemanager.utilities.SecurePreferences;
@@ -30,6 +31,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
     private EditText mPasswordEditText;
     //the button used
     private Button mLogInButton;
+    private Button mSignUpButton;
     //the error textviews
     private TextView mUsernameError;
     private TextView mPasswordError;
@@ -56,13 +58,14 @@ public class DoctorLoginActivity extends AppCompatActivity {
         mPasswordEditText = (EditText) findViewById(R.id.doctor_login_password_value);
         //the buttons
         mLogInButton = (Button) findViewById(R.id.doctor_login_button);
+        mSignUpButton = (Button) findViewById(R.id.doctor_login_signup_button);
         //the error fields
         mUsernameError = (TextView) findViewById(R.id.doctor_login_username_error);
         mPasswordError = (TextView) findViewById(R.id.doctor_login_password_error);
     }
     /*******************************END OF UI METHODS******************************/
 
-    /****************************START OF onClick METHODS****************************/
+    /****************************START OF onClick/NAVIGATION METHODS****************************/
     private void setOnClickListeners() {
         mLogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +73,20 @@ public class DoctorLoginActivity extends AppCompatActivity {
                 checkDoctorCredentials();
             }
         });
+        mSignUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSignUpActivity();
+            }
+        });
 
     }
 
-    /****************************END OF onClick METHODS****************************/
+    private void openSignUpActivity() {
+        Intent buyerIntent = new Intent(this, DoctorSignUpActivity.class);
+        startActivity(buyerIntent);
+    }
+    /****************************END OF onClick/NAVIGATION METHODS****************************/
 
     /*****************************START OF CHECK METHODS*****************************/
 

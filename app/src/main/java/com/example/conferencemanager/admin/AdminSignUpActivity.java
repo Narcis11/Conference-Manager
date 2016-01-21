@@ -116,7 +116,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
         }
         else if (mPasswordEditText.getText().toString().length() < 7) {
             mPasswordError.setVisibility(View.VISIBLE);
-            mPasswordError.setText(getResources().getString(R.string.admin_signup_short_password));
+            mPasswordError.setText(getResources().getString(R.string.signup_short_password));
             mPasswordEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
             return false;
         }
@@ -140,7 +140,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
         }
         else if (!mPasswordEditText.getText().toString().equals(mConfirmPasswordEditText.getText().toString())) {
             mConfirmPasswordError.setVisibility(View.VISIBLE);
-            mConfirmPasswordError.setText(getResources().getString(R.string.admin_signup_password_mismatch));
+            mConfirmPasswordError.setText(getResources().getString(R.string.signup_password_mismatch));
             mConfirmPasswordEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
             return false;
         }
@@ -164,7 +164,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
         }
         else if (!Patterns.EMAIL_ADDRESS.matcher(mEmailEditText.getText().toString()).matches() ) {
             mEmailError.setVisibility(View.VISIBLE);
-            mEmailError.setText(getResources().getString(R.string.admin_registration_invalid_email));
+            mEmailError.setText(getResources().getString(R.string.registration_invalid_email));
             mEmailEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
             return false;
         }

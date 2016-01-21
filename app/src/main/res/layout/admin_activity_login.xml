@@ -18,7 +18,7 @@
         android:layout_marginEnd="@dimen/activity_vertical_margin_double"
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
-        android:hint="@string/admin_username_hint"
+        android:hint="@string/username_hint"
         android:layout_above="@+id/admin_login_password_value"/>
 
     <!--Username error-->
@@ -52,7 +52,7 @@
         android:layout_above="@+id/admin_login_button"
         android:layout_marginTop="@dimen/activity_vertical_margin_double"
         android:inputType="textPassword"
-        android:hint="@string/admin_password_hint"/>
+        android:hint="@string/password_hint"/>
 
     <!--Password error-->
     <TextView
@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/admin_login_newuser"
-        android:text="@string/admin_login_new_user"
+        android:text="@string/login_new_user"
         android:textSize="@dimen/Material.Text.Title.Size"
         android:textColor="@color/black"
         android:layout_above="@+id/admin_login_signup_button"
