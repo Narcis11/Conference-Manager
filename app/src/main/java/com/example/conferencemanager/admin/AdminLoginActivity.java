@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.conferencemanager.R;
+import com.example.conferencemanager.utilities.Constants;
+import com.example.conferencemanager.utilities.SecurePreferences;
 import com.example.conferencemanager.utilities.Utility;
 import com.example.conferencemanager.data.UsersContract;
 
@@ -34,14 +36,13 @@ public class AdminLoginActivity extends AppCompatActivity {
     //generic error message
     private String EMPTY_FIELD_ERROR = "";
     //test user and password
-    private final String TEST_USERNAME = "admin123";
-    private final String TEST_PASSWORD = "adminpass123";
-
+    private SecurePreferences mSecurePreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_activity_login);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mSecurePreferences = new SecurePreferences(mContext, Constants.PREF_CREDENTIALS, Constants.PREF_CREDENTIALS_KEY, true);
         mContext = getApplicationContext();
         EMPTY_FIELD_ERROR = getResources().getString(R.string.no_input);
         loadUiElements();
@@ -171,6 +172,9 @@ public class AdminLoginActivity extends AppCompatActivity {
         protected void onPostExecute(Cursor cursor) {
             int cursorCount = cursor.getCount();
             if (cursorCount == 1) {
+                //save the login
+                mSecurePreferences.put(Constants.PREF_IS_ADMIN_LOGGED_IN_KEY, Constants.PREF_IS_ADMIN_LOGGED_IN_TRUE);
+                //open the main activity
                 Intent mainActivityIntent = new Intent(AdminLoginActivity.this, AdminMainActivity.class);
                 //clear the intent stack so that the user can't return to this activity
                 mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

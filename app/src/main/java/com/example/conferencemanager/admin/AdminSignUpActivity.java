@@ -19,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.conferencemanager.R;
+import com.example.conferencemanager.utilities.Constants;
+import com.example.conferencemanager.utilities.SecurePreferences;
 import com.example.conferencemanager.utilities.Utility;
 import com.example.conferencemanager.data.UsersContract;
 
@@ -46,6 +48,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
     private Button mSignUpButton;
     //generic error message
     private static String EMPTY_FIELD_ERROR = "";
+    private SecurePreferences mSecurePreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mContext = getApplicationContext();
         EMPTY_FIELD_ERROR = getResources().getString(R.string.no_input);
+        mSecurePreferences = new SecurePreferences(mContext, Constants.PREF_CREDENTIALS, Constants.PREF_CREDENTIALS_KEY, true);
         loadUIElements();
         //set the onClick listener for the sign button
         //since there's only one click listener, there's no point in defining a separate method
@@ -260,6 +264,9 @@ public class AdminSignUpActivity extends AppCompatActivity {
         protected void onPostExecute(Integer rowsInserted) {
             Log.i(LOG_TAG, "rowsInserted: " + rowsInserted);
             if (rowsInserted == 1) {
+                //save the login
+                mSecurePreferences.put(Constants.PREF_IS_ADMIN_LOGGED_IN_KEY, Constants.PREF_IS_ADMIN_LOGGED_IN_TRUE);
+                //open the main activity
                 Intent mainActivityIntent = new Intent(AdminSignUpActivity.this, AdminMainActivity.class);
                 //clear the intent stack so that the user can't return to this activity
                 mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
