@@ -229,13 +229,12 @@ public class AdminSignUpActivity extends AppCompatActivity {
             if (cursorCount == 0) {
                 //Log.i(LOG_TAG, "The user does not exist, proceed further");
                 //save the new user
-                final String USER_TYPE = "Admin";
                 Vector<ContentValues> cVVector = new Vector<>(3);
                 ContentValues userValues = new ContentValues();
                 userValues.put(UsersContract.UsersEntry.COLUMN_USERNAME, mUsernameEditText.getText().toString());
                 //Log.i(LOG_TAG, "Encoded password: " + Utility.generateEncodedPassword(mPasswordEditText.getText().toString()));
                 userValues.put(UsersContract.UsersEntry.COLUMN_PASSWORD, Utility.generateEncodedPassword(mPasswordEditText.getText().toString()));
-                userValues.put(UsersContract.UsersEntry.COLUMN_USER_TYPE, USER_TYPE);
+                userValues.put(UsersContract.UsersEntry.COLUMN_USER_TYPE, Constants.ADMIN_USER_TYPE);
                 userValues.put(UsersContract.UsersEntry.COLUMN_EMAIL, mEmailEditText.getText().toString());
                 cVVector.add(userValues);
                 new SaveUsernameAsync().execute(cVVector);

@@ -35,7 +35,6 @@ public class AdminLoginActivity extends AppCompatActivity {
     private TextView mPasswordError;
     //generic error message
     private String EMPTY_FIELD_ERROR = "";
-    //test user and password
     private SecurePreferences mSecurePreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,6 @@ public class AdminLoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mContext = getApplicationContext();
         mSecurePreferences = new SecurePreferences(mContext, Constants.PREF_CREDENTIALS, Constants.PREF_CREDENTIALS_KEY, true);
-        mContext = getApplicationContext();
         EMPTY_FIELD_ERROR = getResources().getString(R.string.no_input);
         loadUiElements();
         setOnClickListeners();

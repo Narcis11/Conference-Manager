@@ -9,8 +9,8 @@
     <!--Used in the log in/sign up pages-->
     <string name="login_button">Log in</string>
     <string name="signup_button">Sign up</string>
-    <string name="no_input">Please complete the field above</string>
-    <string name="invalid_login">Invalid login credentials.</string>
+    <string name="no_input">Please complete the field above.</string>
+    <string name="invalid_login">Invalid login credentials</string>
     <string name="generic_error_occurred">An error occurred. Please try again.</string>
     <string name="signup_user_check">Checking username availability&#8230;</string>
     <string name="signup_user_exists">This username is already registered.</string>
@@ -40,6 +40,7 @@
     <!--Activity titles-->
     <string name="title_activity_admin_login">Admin Log In</string>
     <string name="title_activity_admin_sign_up">Admin Sign Up</string>
+    <string name="title_activity_admin_main">Dashboard</string>
     <!--************************************End of ADMIN section******************************* -->
 
 
@@ -54,6 +55,5 @@
 
     <!--Activity titles-->
     <string name="title_activity_doctor_login">Doctor Log In</string>
-    <string name="title_activity_admin_main">AdminMainActivity</string>
     <!--************************************End of DOCTOR section******************************* -->
 </resources>

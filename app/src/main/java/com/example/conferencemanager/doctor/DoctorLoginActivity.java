@@ -1,7 +1,10 @@
 package com.example.conferencemanager.doctor;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.conferencemanager.R;
+import com.example.conferencemanager.admin.AdminMainActivity;
+import com.example.conferencemanager.data.UsersContract;
+import com.example.conferencemanager.utilities.Constants;
+import com.example.conferencemanager.utilities.SecurePreferences;
+import com.example.conferencemanager.utilities.Utility;
 
 public class DoctorLoginActivity extends AppCompatActivity {
 
@@ -31,13 +39,14 @@ public class DoctorLoginActivity extends AppCompatActivity {
     //test user and password
     private final String TEST_USERNAME = "doctor123";
     private final String TEST_PASSWORD = "doctorpass123";
-
+    private SecurePreferences mSecurePreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.doctor_activity_login);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mContext = getApplicationContext();
+        mSecurePreferences = new SecurePreferences(mContext, Constants.PREF_CREDENTIALS, Constants.PREF_CREDENTIALS_KEY, true);
         EMPTY_FIELD_ERROR = getResources().getString(R.string.no_input);
         loadUiElements();
         setOnClickListeners();
@@ -111,16 +120,10 @@ public class DoctorLoginActivity extends AppCompatActivity {
 
     private void checkDoctorCredentials() {
         if (checkUsernameField() && checkPasswordField()) {
-            if (!(mUsernameEditText.getText().toString().equals(TEST_USERNAME) || mPasswordEditText.getText().equals(TEST_PASSWORD))) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(DoctorLoginActivity.this);
-                builder.setMessage(R.string.invalid_login)
-                        .setTitle(R.string.generic_error_occurred)
-                        .setPositiveButton(android.R.string.ok, null);
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-            else
-                logInDoctor();
+            String[] userValues = new String[2];
+            userValues[0] = mUsernameEditText.getText().toString();
+            userValues[1] = mPasswordEditText.getText().toString();
+            new CheckUserCredentialsAsync().execute(userValues);
 
         }
         else {
@@ -132,9 +135,55 @@ public class DoctorLoginActivity extends AppCompatActivity {
             }
         }
     }
-    private void logInDoctor() {
-        Toast.makeText(mContext, "Ready to log in", Toast.LENGTH_SHORT).show();
-    }
     /*****************************END OF CHECK METHODS*****************************/
+
+    /*****************************************START OF DATABASE METHODS*************************************/
+    class CheckUserCredentialsAsync extends AsyncTask<String, Void, Cursor> {
+        @Override
+        protected Cursor doInBackground(String... params) {
+            String inputUsername = params[0];
+            String inputPassword = params[1];
+            String[] querySelectionArgs = {inputUsername, Utility.generateEncodedPassword(inputPassword)};
+            String querySelection = UsersContract.UsersEntry.COLUMN_USERNAME + " = ? AND " +
+                    UsersContract.UsersEntry.COLUMN_PASSWORD + " = ?";
+            final String[] USERS_COLUMNS = {
+                    UsersContract.UsersEntry.TABLE_NAME + "." + UsersContract.UsersEntry._ID,
+                    UsersContract.UsersEntry.COLUMN_USERNAME,
+                    UsersContract.UsersEntry.COLUMN_PASSWORD
+            };
+            return mContext.getContentResolver().query(
+                    UsersContract.UsersEntry.CONTENT_URI,
+                    USERS_COLUMNS,
+                    querySelection,
+                    querySelectionArgs,
+                    null
+            );
+        }
+
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            int cursorCount = cursor.getCount();
+            if (cursorCount == 1) {
+                //save the login
+                mSecurePreferences.put(Constants.PREF_IS_ADMIN_LOGGED_IN_KEY, Constants.PREF_IS_ADMIN_LOGGED_IN_TRUE);
+                //open the main activity
+                Intent mainActivityIntent = new Intent(DoctorLoginActivity.this, AdminMainActivity.class);
+                //clear the intent stack so that the user can't return to this activity
+                mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(mainActivityIntent);
+            }
+            else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(DoctorLoginActivity.this);
+                builder.setMessage(R.string.invalid_login)
+                        .setTitle(R.string.generic_error_occurred)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+
+        }
+    }
+    /*****************************************END OF DATABASE METHODS*************************************/
 
 }
