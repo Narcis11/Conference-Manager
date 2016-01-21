@@ -65,5 +65,6 @@
     <string name="title_activity_doctor_sign_up">Doctor Sign Up</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_admin_conference_details">AdminConferenceDetailsActivity</string>
     <!--************************************End of DOCTOR section******************************* -->
 </resources>

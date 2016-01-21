@@ -14,6 +14,7 @@
             android:theme="@style/MainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -51,7 +52,7 @@
 
         <activity
             android:name=".admin.AdminMainActivity"
-            android:label="@string/title_activity_admin_main"/>
+            android:label="@string/title_activity_admin_main" />
         <activity
             android:name=".doctor.DoctorMainActivity"
             android:label="@string/title_activity_doctor_main" />
@@ -62,6 +63,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.conferencemanager.doctor.DoctorLoginActivity" />
+        </activity>
+        <activity
+            android:name=".admin.AdminConferenceDetailsActivity"
+            android:label="@string/title_activity_admin_conference_details"
+            android:parentActivityName=".admin.AdminMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.conferencemanager.admin.AdminMainActivity" />
         </activity>
     </application>
 
