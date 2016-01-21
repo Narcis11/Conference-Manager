@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.example.conferencemanager.admin.AdminLoginActivity;
 import com.example.conferencemanager.admin.AdminMainActivity;
 import com.example.conferencemanager.doctor.DoctorLoginActivity;
+import com.example.conferencemanager.doctor.DoctorMainActivity;
 import com.example.conferencemanager.utilities.Constants;
 import com.example.conferencemanager.utilities.SecurePreferences;
 
@@ -65,6 +66,14 @@ public class LandingPageActivity extends AppCompatActivity {
         mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainActivityIntent);
     }
+
+    private void openDoctorMainActivity() {
+        Intent mainActivityIntent = new Intent(LandingPageActivity.this, DoctorMainActivity.class);
+        //clear the intent stack so that the user can't return to this activity
+        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainActivityIntent);
+    }
     /*******************************************END OF onClick/NAVIGATION METHODS******************************************/
 
     private void checkUserAlreadyLoggedIn() {
@@ -72,6 +81,11 @@ public class LandingPageActivity extends AppCompatActivity {
                 mSecurePreferences.getString(Constants.PREF_IS_ADMIN_LOGGED_IN_KEY).equals(Constants.PREF_IS_ADMIN_LOGGED_IN_TRUE));
         if (mIsAdminLoggedIn)
             openAdminMainActivity();
+
+        boolean mIsDoctorLoggedIn = (mSecurePreferences.getString(Constants.PREF_IS_DOCTOR_LOGGED_IN_KEY) != null &&
+                mSecurePreferences.getString(Constants.PREF_IS_DOCTOR_LOGGED_IN_KEY).equals(Constants.PREF_IS_DOCTOR_LOGGED_IN_TRUE));
+        if (mIsDoctorLoggedIn)
+            openDoctorMainActivity();
     }
 
 
