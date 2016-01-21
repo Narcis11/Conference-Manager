@@ -100,7 +100,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
             if (mUsernameError.getVisibility() == View.VISIBLE) {
                 mUsernameError.setVisibility(View.INVISIBLE);
                 mUsernameError.setText("");
-                mUsernameEditText.getBackground().setColorFilter(getResources().getColor(R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mUsernameEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
                 return true;
             }
         }
@@ -172,7 +172,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
             if (mEmailError.getVisibility() == View.VISIBLE) {
                 mEmailError.setVisibility(View.INVISIBLE);
                 mEmailError.setText("");
-                mEmailEditText.getBackground().setColorFilter(getResources().getColor(R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mEmailEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
             }
         }
         return true;
