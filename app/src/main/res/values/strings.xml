@@ -38,10 +38,12 @@
     <!--Used in the Landing Page-->
     <string name="landing_admin_button">Admin</string>
 
-    <!--Activity titles-->
+    <!--Activity/framgment titles-->
     <string name="title_activity_admin_login">Admin Log In</string>
     <string name="title_activity_admin_sign_up">Admin Sign Up</string>
-    <string name="title_activity_admin_main">Dashboard</string>
+    <string name="title_activity_admin_main"></string>
+    <string name="title_fragment_conferences">Conferences</string>
+    <string name="title_fragment_topics">Topics</string>
     <!--************************************End of ADMIN section******************************* -->
 
 
@@ -54,9 +56,11 @@
     <string name="doctor_username_hint">Username</string>
     <string name="doctor_password_hint">Password</string>
 
-    <!--Activity titles-->
+    <!--Activity/Fragment titles-->
     <string name="title_activity_doctor_login">Doctor Log In</string>
     <string name="title_activity_doctor_main">DoctorMainActivity</string>
     <string name="title_activity_doctor_sign_up">Doctor Sign Up</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--************************************End of DOCTOR section******************************* -->
 </resources>
