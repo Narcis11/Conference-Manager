@@ -1,6 +1,5 @@
 package com.example.conferencemanager.admin;
 
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.conferencemanager.R;
-import com.example.conferencemanager.Utility;
+import com.example.conferencemanager.utilities.Utility;
 import com.example.conferencemanager.data.UsersContract;
 
 import java.util.Vector;
@@ -49,7 +46,6 @@ public class AdminSignUpActivity extends AppCompatActivity {
     private Button mSignUpButton;
     //generic error message
     private static String EMPTY_FIELD_ERROR = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -262,7 +258,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer rowsInserted) {
-            Log.i(LOG_TAG,"rowsInserted: " + rowsInserted);
+            Log.i(LOG_TAG, "rowsInserted: " + rowsInserted);
             if (rowsInserted == 1) {
                 Intent mainActivityIntent = new Intent(AdminSignUpActivity.this, AdminMainActivity.class);
                 //clear the intent stack so that the user can't return to this activity
