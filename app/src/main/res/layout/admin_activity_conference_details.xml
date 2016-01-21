@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:id="@+id/admin_conf_details_parent_layout"
+    tools:context="com.example.conferencemanager.admin.AdminConferenceDetailsActivity">
+    
+    <!--*******Title********-->
+    <!--Title text view-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_conf_details_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/black"
+        android:text="@string/admin_conf_details_title"/>
+
+    <!--Title value-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_conf_details_title_value"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:editable="true"
+        android:enabled="false"
+        android:layout_below="@+id/admin_conf_details_title"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/material_grey_800"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:maxLines="2"
+        tools:text="Title"/>
+
+    <!--*******Description********-->
+    <!--Description text view-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_conf_details_description"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/admin_conf_details_title_value"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/black"
+        android:text="@string/admin_conf_details_description"/>
+
+    <!--Description value-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_conf_details_description_value"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:editable="true"
+        android:enabled="false"
+        android:layout_below="@+id/admin_conf_details_description"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/material_grey_800"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:maxLines="6"
+        tools:text="Background sticky concurrent mark sweep GC freed 14957(857KB) AllocSpace objects, 2(40KB) LOS objects, 70% free, 1082KB/3MB"/>
+
+
+    <!--*******Address********-->
+    <!--Address text view-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_conf_details_address"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/admin_conf_details_description_value"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/black"
+        android:text="@string/admin_conf_details_address"/>
+
+    <!--Address value-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_conf_details_address_value"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:editable="true"
+        android:enabled="false"
+        android:layout_below="@+id/admin_conf_details_address"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/material_grey_800"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:maxLines="2"
+        tools:text="The application may be doing too much work on its main thread."/>
+
+    <!--*******Date********-->
+    <!--Date text view-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_conf_details_date"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/admin_conf_details_address_value"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/black"
+        android:text="@string/admin_conf_details_date"/>
+
+    <!--Date value-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_conf_details_date_value"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:editable="true"
+        android:enabled="false"
+        android:layout_below="@+id/admin_conf_details_date"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/material_grey_800"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="The application may be doing too much work on its main thread."/>
+
+</RelativeLayout>
