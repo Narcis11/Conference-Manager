@@ -35,6 +35,21 @@ public class UsersTest extends AndroidTestCase {
         assertTrue(positionId != -1);
     }
 
+    public void testInsertConferences() throws Throwable {
+        ContentValues insertValues = new ContentValues();
+        insertValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_TITLE, "Test conference");
+        insertValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_ADDRESS, "Wayoming Street, no. 67");
+        insertValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_ADDED_BY, "test");
+        insertValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_DESCRIPTION, "The conference will take place in the big event hall. Bring your" +
+                "own snack. No entrance fee.");
+        insertValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_DATE, "test");
+        Uri insertUri = mContext.getContentResolver().insert(UsersContract.UsersEntry.CONTENT_URI, insertValues);
+        long positionId = ContentUris.parseId(insertUri);
+        Log.i(LOG_TAG, "Insert uri is: " + insertUri);
+        Log.i(LOG_TAG, "Row number inserted = " + positionId);
+        assertTrue(positionId != -1);
+    }
+
     public void testDeleteUsers() throws Throwable {
         String deleteCriteria = "test user";
         String[] querySelectionArgs = new String[1];

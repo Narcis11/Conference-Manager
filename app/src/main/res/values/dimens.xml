@@ -7,7 +7,7 @@
     <dimen name="activity_vertical_margin_double">32dp</dimen>
     <dimen name="activity_vertical_margin_quarter">4dp</dimen>
     <dimen name="activity_six_square">36dp</dimen>
-    <dimen name="button_padding_half">4dp</dimen>
+    <dimen name="standard_elevation">2dp</dimen>
     <!--Dimensions used for buttons-->
     <dimen name="standard_button_height">40dp</dimen>
     <dimen name="standard_button_width">120dp</dimen>
@@ -15,6 +15,7 @@
     <dimen name="button_elevation">10dp</dimen>
     <dimen name="button_padding">8dp</dimen>
     <dimen name="button_radius">2dp</dimen>
+    <dimen name="button_padding_half">4dp</dimen>
     <!--Typography dimensions-->
     <dimen name="Material.Text.Display1.Size">34sp</dimen>
     <dimen name="Material.Text.Headline.Size">24sp</dimen>
