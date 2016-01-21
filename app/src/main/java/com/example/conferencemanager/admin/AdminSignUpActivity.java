@@ -1,10 +1,15 @@
 package com.example.conferencemanager.admin;
 
+import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
@@ -15,6 +20,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.conferencemanager.R;
+import com.example.conferencemanager.Utility;
+import com.example.conferencemanager.data.UsersContract;
+
+import java.util.Vector;
 
 public class AdminSignUpActivity extends AppCompatActivity {
 
@@ -27,6 +36,8 @@ public class AdminSignUpActivity extends AppCompatActivity {
     private EditText mPasswordEditText;
     private EditText mConfirmPasswordEditText;
     private EditText mEmailEditText;
+    //the edit text values
+    private String mPasswordValue;
     //the error messages
     private TextView mUsernameError;
     private TextView mPasswordError;
@@ -36,6 +47,8 @@ public class AdminSignUpActivity extends AppCompatActivity {
     private Button mSignUpButton;
     //generic error message
     private static String EMPTY_FIELD_ERROR = "";
+    //the dialog displayed when checking the username
+    ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +148,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
             if (mConfirmPasswordError.getVisibility() == View.VISIBLE) {
                 mConfirmPasswordError.setVisibility(View.INVISIBLE);
                 mConfirmPasswordError.setText("");
-                mConfirmPasswordEditText.getBackground().setColorFilter(getResources().getColor(R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mConfirmPasswordEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
                 return true;
             }
         }
@@ -167,7 +180,9 @@ public class AdminSignUpActivity extends AppCompatActivity {
 
     private void checkAllFields() {
         if (checkUsernameField() && checkPasswordField() && checkConfirmPasswordField() && checkEmailField()) {
-            Log.i(LOG_TAG,"Ready to sign up");
+            Log.i(LOG_TAG, "Ready to sign up");
+            displayDialog();
+            new CheckUsernameAvailability().execute(mUsernameEditText.getText().toString());
         }
         else {
             if (!checkUsernameField()) {
@@ -184,6 +199,79 @@ public class AdminSignUpActivity extends AppCompatActivity {
             }
         }
     }
-    /*****************************************START OF CHECK METHODS*************************************/
+    /*****************************************END OF CHECK METHODS*************************************/
+
+    /*****************************************START OF DATABASE METHODS*************************************/
+    //used to check if the input username is already registered
+    private class CheckUsernameAvailability extends AsyncTask<String, Void, Cursor> {
+        @Override
+        protected Cursor doInBackground(String... params) {
+            String inputUsername = params[0];
+            final String[] USERS_COLUMNS = {
+                    UsersContract.UsersEntry.TABLE_NAME + "." + UsersContract.UsersEntry._ID,
+                    UsersContract.UsersEntry.COLUMN_USERNAME
+            };
+            String[] querySelectionArgs = {inputUsername.toLowerCase()};
+            Log.i(LOG_TAG, "queryArgs[0]: " + querySelectionArgs[0]);
+            String querySelection = "LOWER(" + UsersContract.UsersEntry.COLUMN_USERNAME + ")" + " = ?";
+            return mContext.getContentResolver().query(
+                    UsersContract.UsersEntry.CONTENT_URI,
+                    USERS_COLUMNS,
+                    querySelection,
+                    querySelectionArgs,
+                    null
+            );
+        }
+
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            int cursorCount = cursor.getCount();
+            Log.i(LOG_TAG,"cursorCount: " + cursorCount);
+            if (cursorCount == 0) {
+                Log.i(LOG_TAG, "The user does not exist, proceed further");
+                cancelDialog();
+                //save the new user
+                String[] userValues = new String[3];
+                userValues[0] = mUsernameEditText.getText().toString();
+                userValues[1] = Utility.generateEncodedPassword(mPasswordEditText.getText().toString());
+                userValues[2] = mEmailEditText.getText().toString();
+                new SaveUsernameAsync().execute(userValues);
+            }
+            else {
+                cancelDialog();
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminSignUpActivity.this);
+                builder.setMessage(R.string.signup_user_exists)
+                        .setTitle(R.string.generic_error_occurred)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        }
+    }
+
+    class SaveUsernameAsync extends AsyncTask<String, Void, Integer> {
+        @Override
+        protected Integer doInBackground(String... params) {
+            Vector<ContentValues> cVVector = new Vector<>(3);
+            return null;
+        }
+    }
+
+    /*****************************************END OF DATABASE METHODS*************************************/
+
+    /**************************START OF DIALOG METHODS*****************************/
+    private void displayDialog() {
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage(getResources().getString(R.string.signup_user_check));
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCancelable(false); //don't allow the user to cancel the dialog
+        mProgressDialog.show();
+    }
+
+    private void cancelDialog() {
+        if (mProgressDialog != null ) mProgressDialog.dismiss();
+    }
+    /**************************END OF DIALOG METHODS*****************************/
 
 }
