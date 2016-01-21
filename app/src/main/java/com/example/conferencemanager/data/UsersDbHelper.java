@@ -25,7 +25,16 @@ public class UsersDbHelper extends SQLiteOpenHelper {
                 UsersContract.UsersEntry.COLUMN_EMAIL + " TEXT, " +
                 UsersContract.UsersEntry.COLUMN_USER_TYPE + " TEXT " + ");";
 
+        final String SQL_CREATE_CONFERENCES_TABLE = "CREATE TABLE " + UsersContract.ConferencesEntry.TABLE_NAME + " (" +
+                UsersContract.ConferencesEntry._ID + " INTEGER PRIMARY KEY, " +
+                UsersContract.ConferencesEntry.COLUMN_TITLE + " TEXT, " +
+                UsersContract.ConferencesEntry.COLUMN_DESCRIPTION + " TEXT, " +
+                UsersContract.ConferencesEntry.COLUMN_ADDED_BY + " TEXT, " +
+                UsersContract.ConferencesEntry.COLUMN_DATE + " TEXT, " +
+                UsersContract.ConferencesEntry.COLUMN_ADDRESS + " TEXT " + ");";
+
         db.execSQL(SQL_CREATE_USERS_TABLE);
+        db.execSQL(SQL_CREATE_CONFERENCES_TABLE);
     }
 
     @Override
