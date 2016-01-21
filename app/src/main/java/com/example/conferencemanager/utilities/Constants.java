@@ -18,7 +18,9 @@ public class Constants {
     public static final String PREF_IS_ADMIN_LOGGED_IN_KEY = "pref_is_admin_logged_in_key";
     public static final String PREF_IS_ADMIN_LOGGED_IN_TRUE = "pref_is_admin_logged_in_true";
 
-
+    //used in bundle communications
+    public static final String BUNDLE_ADMIN_CONF_TITLE_KEY = "bundle_admin_conf_title_key";
+    public static final String BUNDLE_ADMIN_CONF_ID_KEY = "bundle_admin_conf_id_key";
 
     /*********************************USED FOR THE DOCTOR SIDE***********************************/
     //used to determine whether the doctor is already logged in

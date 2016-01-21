@@ -1,6 +1,7 @@
 package com.example.conferencemanager.admin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,12 +12,14 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.example.conferencemanager.R;
 import com.example.conferencemanager.data.UsersContract;
+import com.example.conferencemanager.utilities.Constants;
 
 /**
  This fragment is used to display the conferences for an admin.
@@ -87,11 +90,32 @@ public class AdminConferencesFragment extends Fragment implements LoaderManager.
             @Override
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
                 switch (columnIndex) {
-                    case COL_CONF_TITLE: ((TextView) view).setText(cursor.getString(COL_CONF_TITLE)); return true;
-                    case COL_CONF_DATE: ((TextView) view).setText(cursor.getString(COL_CONF_DATE)); return true;
-                    case COL_CONF_ADDRESS: ((TextView) view).setText(cursor.getString(COL_CONF_ADDRESS)); return true;
+                    case COL_CONF_TITLE:
+                        ((TextView) view).setText(cursor.getString(COL_CONF_TITLE));
+                        return true;
+                    case COL_CONF_DATE:
+                        ((TextView) view).setText(cursor.getString(COL_CONF_DATE));
+                        return true;
+                    case COL_CONF_ADDRESS:
+                        ((TextView) view).setText(cursor.getString(COL_CONF_ADDRESS));
+                        return true;
                 }
                 return true;
+            }
+        });
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor cursor = mConferencesAdapter.getCursor();
+                if (cursor != null && cursor.moveToPosition(position)) {
+                    Intent detailsIntent = new Intent(getActivity(), AdminConferenceDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(Constants.BUNDLE_ADMIN_CONF_ID_KEY, cursor.getInt(COL_CONF_ID));
+                    bundle.putString(Constants.BUNDLE_ADMIN_CONF_TITLE_KEY, cursor.getString(COL_CONF_TITLE));
+                    detailsIntent.putExtras(bundle);
+                    startActivity(detailsIntent);
+
+                }
             }
         });
         // Inflate the layout for this fragment
