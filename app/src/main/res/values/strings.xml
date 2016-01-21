@@ -51,5 +51,6 @@
 
     <!--Activity titles-->
     <string name="title_activity_doctor_login">Doctor Log In</string>
+    <string name="title_activity_admin_main">AdminMainActivity</string>
     <!--************************************End of DOCTOR section******************************* -->
 </resources>

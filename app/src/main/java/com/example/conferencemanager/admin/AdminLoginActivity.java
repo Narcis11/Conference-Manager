@@ -155,7 +155,6 @@ public class AdminLoginActivity extends AppCompatActivity {
         protected Cursor doInBackground(String... params) {
             String inputUsername = params[0];
             String inputPassword = params[1];
-            Log.i(LOG_TAG,"In CheckUserCredentials, encoded password: " + Utility.generateEncodedPassword(inputPassword));
             String[] querySelectionArgs = {inputUsername, Utility.generateEncodedPassword(inputPassword)};
             String querySelection = UsersContract.UsersEntry.COLUMN_USERNAME + " = ? AND " +
                     UsersContract.UsersEntry.COLUMN_PASSWORD + " = ?";
@@ -176,10 +175,12 @@ public class AdminLoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Cursor cursor) {
             int cursorCount = cursor.getCount();
-            Log.i(LOG_TAG,"cursorCount: " + cursorCount);
             if (cursorCount == 1) {
-                //TODO: Open the Admin main activity
-                Toast.makeText(mContext,"Valid credentials", Toast.LENGTH_SHORT).show();
+                Intent mainActivityIntent = new Intent(AdminLoginActivity.this, AdminMainActivity.class);
+                //clear the intent stack so that the user can't return to this activity
+                mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(mainActivityIntent);
             }
             else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AdminLoginActivity.this);

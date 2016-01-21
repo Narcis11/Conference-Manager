@@ -3,6 +3,7 @@ package com.example.conferencemanager.admin;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
@@ -269,8 +270,11 @@ public class AdminSignUpActivity extends AppCompatActivity {
             Log.i(LOG_TAG,"rowsInserted: " + rowsInserted);
             cancelDialog();
             if (rowsInserted == 1) {
-                //TODO: Open the Admin main activity
-                Toast.makeText(mContext,"Save successful", Toast.LENGTH_SHORT).show();
+                Intent mainActivityIntent = new Intent(AdminSignUpActivity.this, AdminMainActivity.class);
+                //clear the intent stack so that the user can't return to this activity
+                mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(mainActivityIntent);
             }
             else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AdminSignUpActivity.this);

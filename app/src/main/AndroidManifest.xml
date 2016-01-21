@@ -42,6 +42,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.conferencemanager.admin.AdminLoginActivity" />
         </activity>
+
         <provider
             android:name=".data.UsersProvider"
             android:authorities="@string/content_authority"
@@ -49,6 +50,9 @@
             android:exported="false"
             android:syncable="true" />
 
+        <activity
+            android:name=".admin.AdminMainActivity"
+            android:label="@string/title_activity_admin_main"></activity>
     </application>
 
 </manifest>
