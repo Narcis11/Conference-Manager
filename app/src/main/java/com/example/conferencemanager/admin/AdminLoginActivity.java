@@ -42,6 +42,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_activity_login);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mContext = getApplicationContext();
         mSecurePreferences = new SecurePreferences(mContext, Constants.PREF_CREDENTIALS, Constants.PREF_CREDENTIALS_KEY, true);
         mContext = getApplicationContext();
         EMPTY_FIELD_ERROR = getResources().getString(R.string.no_input);

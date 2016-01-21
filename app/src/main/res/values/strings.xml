@@ -15,6 +15,9 @@
     <string name="signup_user_check">Checking username availability&#8230;</string>
     <string name="signup_user_exists">This username is already registered.</string>
     <string name="signup_user_failed">Failed to create the new user.</string>
+
+    <!--Used in the Admin/Doctor main activities-->
+    <string name="menu_logout">Logout</string>
     <!--************************************End of GENERAL section******************************* -->
 
 

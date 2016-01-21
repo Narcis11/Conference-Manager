@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.conferencemanager.admin.AdminLoginActivity;
+import com.example.conferencemanager.admin.AdminMainActivity;
 import com.example.conferencemanager.doctor.DoctorLoginActivity;
 import com.example.conferencemanager.utilities.Constants;
 import com.example.conferencemanager.utilities.SecurePreferences;
@@ -58,7 +59,11 @@ public class LandingPageActivity extends AppCompatActivity {
     }
 
     private void openAdminMainActivity() {
-
+        Intent mainActivityIntent = new Intent(LandingPageActivity.this, AdminMainActivity.class);
+        //clear the intent stack so that the user can't return to this activity
+        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainActivityIntent);
     }
     /*******************************************END OF onClick/NAVIGATION METHODS******************************************/
 
