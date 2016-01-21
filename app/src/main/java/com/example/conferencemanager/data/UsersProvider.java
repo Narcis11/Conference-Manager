@@ -19,6 +19,7 @@ public class UsersProvider extends ContentProvider {
     // The URI Matcher used by this content provider.
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private static final int USERS = 100;
+    private static final int CONFERENCES = 101;
 
     @Override
     public boolean onCreate() {
@@ -42,6 +43,17 @@ public class UsersProvider extends ContentProvider {
                         null);
                 break;
             }
+            case CONFERENCES: {
+                cursor = mUsersHelper.getReadableDatabase().query(
+                        UsersContract.ConferencesEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        UsersContract.ConferencesEntry.SORT_ORDER);
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -57,6 +69,7 @@ public class UsersProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case USERS: return UsersContract.UsersEntry.CONTENT_TYPE;
+            case CONFERENCES: return UsersContract.ConferencesEntry.CONTENT_TYPE;
             default: throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
     }
@@ -77,9 +90,18 @@ public class UsersProvider extends ContentProvider {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
+            case CONFERENCES: {
+                long _id = sqLiteDatabase.insert(UsersContract.ConferencesEntry.TABLE_NAME, null, values);
+                if (_id > 0)
+                    returnUri = UsersContract.ConferencesEntry.buildConferencesUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
+
         getContext().getContentResolver().notifyChange(uri, null);
         return returnUri;
     }
@@ -92,6 +114,10 @@ public class UsersProvider extends ContentProvider {
         switch (match) {
             case USERS: {
                 rowsDeleted = sqLiteDatabase.delete(UsersContract.UsersEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            }
+            case CONFERENCES: {
+                rowsDeleted = sqLiteDatabase.delete(UsersContract.ConferencesEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
             default:
@@ -113,6 +139,10 @@ public class UsersProvider extends ContentProvider {
         switch (match) {
             case USERS: {
                 rowsUpdated = sqLiteDatabase.update(UsersContract.UsersEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            }
+            case CONFERENCES: {
+                rowsUpdated = sqLiteDatabase.update(UsersContract.ConferencesEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
             default:
@@ -150,6 +180,27 @@ public class UsersProvider extends ContentProvider {
                 getContext().getContentResolver().notifyChange(uri, null);
                 return returnCount;
             }
+            case CONFERENCES: {
+                sqLiteDatabase.beginTransaction();
+                int returnCount = 0;
+                try {
+                    for (ContentValues value : values) {
+                        long _id = sqLiteDatabase.insert(UsersContract.ConferencesEntry.TABLE_NAME, null, value);
+                        if (_id != -1) {
+                            returnCount++;
+                        }
+                    }
+                    sqLiteDatabase.setTransactionSuccessful();
+                } catch (IllegalStateException e) {
+                    //   Log.e(LOG_TAG, "Error while inserting bulk! = " + e.getMessage());
+                    e.printStackTrace();
+                    return super.bulkInsert(uri, values);//in case of errors, we call the regular insert method
+                } finally {
+                    sqLiteDatabase.endTransaction();
+                }
+                getContext().getContentResolver().notifyChange(uri, null);
+                return returnCount;
+            }
             default:
                 return super.bulkInsert(uri, values);
         }
@@ -161,6 +212,7 @@ public class UsersProvider extends ContentProvider {
 
         // For each type of URI we want to add, we create a corresponding code.
         matcher.addURI(authority, UsersContract.PATH_USERS, USERS);
+        matcher.addURI(authority, UsersContract.PATH_CONFERENCES, CONFERENCES);
         return matcher;
     }
 }

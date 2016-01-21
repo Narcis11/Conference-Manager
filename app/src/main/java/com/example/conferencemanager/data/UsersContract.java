@@ -45,6 +45,7 @@ public class UsersContract {
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_CONFERENCES).build();
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + PATH_CONFERENCES;
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_CONFERENCES;
+        public static final String SORT_ORDER = COLUMN_DATE + " ASC";
         public static Uri buildConferencesUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
