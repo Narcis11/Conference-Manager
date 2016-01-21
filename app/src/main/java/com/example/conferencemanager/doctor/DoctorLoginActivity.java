@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.conferencemanager.R;
-import com.example.conferencemanager.admin.AdminMainActivity;
 import com.example.conferencemanager.data.UsersContract;
 import com.example.conferencemanager.utilities.Constants;
 import com.example.conferencemanager.utilities.SecurePreferences;
@@ -37,8 +36,6 @@ public class DoctorLoginActivity extends AppCompatActivity {
     //generic error message
     private String EMPTY_FIELD_ERROR = "";
     //test user and password
-    private final String TEST_USERNAME = "doctor123";
-    private final String TEST_PASSWORD = "doctorpass123";
     private SecurePreferences mSecurePreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,9 +140,9 @@ public class DoctorLoginActivity extends AppCompatActivity {
         protected Cursor doInBackground(String... params) {
             String inputUsername = params[0];
             String inputPassword = params[1];
-            String[] querySelectionArgs = {inputUsername, Utility.generateEncodedPassword(inputPassword)};
+            String[] querySelectionArgs = {inputUsername, Utility.generateEncodedPassword(inputPassword), Constants.DOCTOR_USER_TYPE};
             String querySelection = UsersContract.UsersEntry.COLUMN_USERNAME + " = ? AND " +
-                    UsersContract.UsersEntry.COLUMN_PASSWORD + " = ?";
+                    UsersContract.UsersEntry.COLUMN_PASSWORD + " = ? AND " + UsersContract.UsersEntry.COLUMN_USER_TYPE + " = ?";
             final String[] USERS_COLUMNS = {
                     UsersContract.UsersEntry.TABLE_NAME + "." + UsersContract.UsersEntry._ID,
                     UsersContract.UsersEntry.COLUMN_USERNAME,
@@ -165,9 +162,9 @@ public class DoctorLoginActivity extends AppCompatActivity {
             int cursorCount = cursor.getCount();
             if (cursorCount == 1) {
                 //save the login
-                mSecurePreferences.put(Constants.PREF_IS_ADMIN_LOGGED_IN_KEY, Constants.PREF_IS_ADMIN_LOGGED_IN_TRUE);
+                mSecurePreferences.put(Constants.PREF_IS_DOCTOR_LOGGED_IN_KEY, Constants.PREF_IS_DOCTOR_LOGGED_IN_TRUE);
                 //open the main activity
-                Intent mainActivityIntent = new Intent(DoctorLoginActivity.this, AdminMainActivity.class);
+                Intent mainActivityIntent = new Intent(DoctorLoginActivity.this, DoctorMainActivity.class);
                 //clear the intent stack so that the user can't return to this activity
                 mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

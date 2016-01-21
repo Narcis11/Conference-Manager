@@ -52,7 +52,10 @@
 
         <activity
             android:name=".admin.AdminMainActivity"
-            android:label="@string/title_activity_admin_main"></activity>
+            android:label="@string/title_activity_admin_main" />
+        <activity
+            android:name=".doctor.DoctorMainActivity"
+            android:label="@string/title_activity_doctor_main"></activity>
     </application>
 
 </manifest>

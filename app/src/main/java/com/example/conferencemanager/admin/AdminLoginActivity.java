@@ -150,9 +150,9 @@ public class AdminLoginActivity extends AppCompatActivity {
         protected Cursor doInBackground(String... params) {
             String inputUsername = params[0];
             String inputPassword = params[1];
-            String[] querySelectionArgs = {inputUsername, Utility.generateEncodedPassword(inputPassword)};
+            String[] querySelectionArgs = {inputUsername, Utility.generateEncodedPassword(inputPassword), Constants.ADMIN_USER_TYPE};
             String querySelection = UsersContract.UsersEntry.COLUMN_USERNAME + " = ? AND " +
-                    UsersContract.UsersEntry.COLUMN_PASSWORD + " = ?";
+                    UsersContract.UsersEntry.COLUMN_PASSWORD + " = ? AND " + UsersContract.UsersEntry.COLUMN_USER_TYPE + " = ?";
             final String[] USERS_COLUMNS = {
                     UsersContract.UsersEntry.TABLE_NAME + "." + UsersContract.UsersEntry._ID,
                     UsersContract.UsersEntry.COLUMN_USERNAME,
