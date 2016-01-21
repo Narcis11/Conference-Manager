@@ -16,7 +16,6 @@ import com.example.conferencemanager.utilities.Constants;
 
 public class AdminConferenceDetailsActivity extends AppCompatActivity{
 
-    private static final String FRAGMENT_TAG = "AdminConferenceDetailsFragment";
     private static final String LOG_TAG = AdminConferenceDetailsActivity.class.getSimpleName();
     Bundle mBundle;
     //the titles
@@ -35,11 +34,6 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_activity_conference_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        /*if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.admin_conf_details_parent_layout, new AdminConferenceDetailsFragment(), FRAGMENT_TAG)
-                    .commit();
-        }*/
         mBundle = getIntent().getExtras();
         String actionBarTitle = mBundle.getString(Constants.BUNDLE_ADMIN_CONF_TITLE_KEY);
         getSupportActionBar().setTitle(actionBarTitle);
