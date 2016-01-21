@@ -22,6 +22,7 @@ public class UsersDbHelper extends SQLiteOpenHelper {
                 UsersContract.UsersEntry._ID + " INTEGER PRIMARY KEY, " +
                 UsersContract.UsersEntry.COLUMN_USERNAME + " TEXT, " +
                 UsersContract.UsersEntry.COLUMN_PASSWORD + " TEXT, " +
+                UsersContract.UsersEntry.COLUMN_EMAIL + " TEXT, " +
                 UsersContract.UsersEntry.COLUMN_USER_TYPE + " TEXT " + ");";
 
         db.execSQL(SQL_CREATE_USERS_TABLE);

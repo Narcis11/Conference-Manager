@@ -17,6 +17,7 @@ public class UsersContract {
         public static final String TABLE_NAME = "users";
         public static final String COLUMN_USERNAME = "username";//text
         public static final String COLUMN_PASSWORD = "password";//text
+        public static final String COLUMN_EMAIL = "email";//text
         public static final String COLUMN_USER_TYPE = "user_type";//text
 
         //used for the content provider

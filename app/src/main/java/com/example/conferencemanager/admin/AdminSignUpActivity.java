@@ -231,11 +231,15 @@ public class AdminSignUpActivity extends AppCompatActivity {
                 Log.i(LOG_TAG, "The user does not exist, proceed further");
                 cancelDialog();
                 //save the new user
-                String[] userValues = new String[3];
-                userValues[0] = mUsernameEditText.getText().toString();
-                userValues[1] = Utility.generateEncodedPassword(mPasswordEditText.getText().toString());
-                userValues[2] = mEmailEditText.getText().toString();
-                new SaveUsernameAsync().execute(userValues);
+                final String USER_TYPE = "Admin";
+                Vector<ContentValues> cVVector = new Vector<>(3);
+                ContentValues userValues = new ContentValues();
+                userValues.put(UsersContract.UsersEntry.COLUMN_USERNAME, mUsernameEditText.getText().toString());
+                Log.i(LOG_TAG, "Encoded password: " + Utility.generateEncodedPassword(mPasswordEditText.getText().toString()));
+                userValues.put(UsersContract.UsersEntry.COLUMN_PASSWORD, Utility.generateEncodedPassword(mPasswordEditText.getText().toString()));
+                userValues.put(UsersContract.UsersEntry.COLUMN_USER_TYPE, USER_TYPE);
+                //userValues[2] = mEmailEditText.getText().toString();
+                //new SaveUsernameAsync().execute(userValues);
             }
             else {
                 cancelDialog();
@@ -249,9 +253,9 @@ public class AdminSignUpActivity extends AppCompatActivity {
         }
     }
 
-    class SaveUsernameAsync extends AsyncTask<String, Void, Integer> {
+    class SaveUsernameAsync extends AsyncTask<Vector<ContentValues>, Void, Integer> {
         @Override
-        protected Integer doInBackground(String... params) {
+        protected Integer doInBackground(Vector<ContentValues>... params) {
             Vector<ContentValues> cVVector = new Vector<>(3);
             return null;
         }
