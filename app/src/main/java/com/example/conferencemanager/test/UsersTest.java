@@ -35,14 +35,12 @@ public class UsersTest extends AndroidTestCase {
         assertTrue(positionId != -1);
     }
 
-    /*public void testDeleteUsers() throws Throwable {
-        String deleteCriteria = "New stores shop";
+    public void testDeleteUsers() throws Throwable {
+        String deleteCriteria = "test user";
         String[] querySelectionArgs = new String[1];
         querySelectionArgs[0] = deleteCriteria;
-        int deletedNo = mContext.getContentResolver().delete(UsersContract.NewStoresEntry.CONTENT_URI, UsersContract.NewStoresEntry.COLUMN_SHOP_NAME + " = ?",
+        int deletedNo = mContext.getContentResolver().delete(UsersContract.UsersEntry.CONTENT_URI, UsersContract.UsersEntry.COLUMN_USERNAME + " = ?",
                 querySelectionArgs);
-        *//*int deletedNo = mContext.getContentResolver().delete(UsersContract.FavouritesEntry.CONTENT_URI, null,
-                null);*//*
         Log.i(LOG_TAG, "Delete no: " + deletedNo);
-    }*/
+    }
 }
