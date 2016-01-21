@@ -12,7 +12,8 @@
         android:id="@+id/admin_conferences_listview"
         android:dividerHeight="@dimen/activity_vertical_margin_half"
         android:elevation="@dimen/standard_elevation"
-        android:divider="@color/material_grey_300"/>
+        android:divider="@color/material_grey_300"
+        android:background="@drawable/listview_style"/>
 
     <!--No orders textview-->
     <TextView

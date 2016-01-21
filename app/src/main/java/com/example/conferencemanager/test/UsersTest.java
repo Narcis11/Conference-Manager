@@ -42,8 +42,10 @@ public class UsersTest extends AndroidTestCase {
         insertValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_ADDED_BY, "test");
         insertValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_DESCRIPTION, "The conference will take place in the big event hall. Bring your" +
                 "own snack. No entrance fee.");
-        insertValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_DATE, "test");
-        Uri insertUri = mContext.getContentResolver().insert(UsersContract.UsersEntry.CONTENT_URI, insertValues);
+        //final DateTime dateTime = new DateTime();
+        //final String format = "EEE, d MMM yy, h:mm aa";
+        insertValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_DATE, "18:30, 12.12.2014");
+        Uri insertUri = mContext.getContentResolver().insert(UsersContract.ConferencesEntry.CONTENT_URI, insertValues);
         long positionId = ContentUris.parseId(insertUri);
         Log.i(LOG_TAG, "Insert uri is: " + insertUri);
         Log.i(LOG_TAG, "Row number inserted = " + positionId);
