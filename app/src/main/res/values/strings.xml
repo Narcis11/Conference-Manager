@@ -12,8 +12,9 @@
     <string name="no_input">Please complete the field above</string>
     <string name="invalid_login">Invalid login credentials.</string>
     <string name="generic_error_occurred">An error occurred. Please try again.</string>
-    <string name="signup_user_check">Checking availability&#8230;</string>
+    <string name="signup_user_check">Checking username availability&#8230;</string>
     <string name="signup_user_exists">This username is already registered.</string>
+    <string name="signup_user_failed">Failed to create the new user.</string>
     <!--************************************End of GENERAL section******************************* -->
 
 

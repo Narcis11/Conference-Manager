@@ -2,13 +2,16 @@ package com.example.conferencemanager.admin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,9 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.conferencemanager.R;
+import com.example.conferencemanager.Utility;
+import com.example.conferencemanager.data.UsersContract;
 
 public class AdminLoginActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = AdminLoginActivity.class.getSimpleName();
     private Context mContext;
     //the edit texts
     private EditText mUsernameEditText;
@@ -126,16 +132,10 @@ public class AdminLoginActivity extends AppCompatActivity {
 
     private void checkAdminCredentials() {
         if (checkUsernameField() && checkPasswordField()) {
-            if (!(mUsernameEditText.getText().toString().equals(TEST_USERNAME) || mPasswordEditText.getText().equals(TEST_PASSWORD))) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(AdminLoginActivity.this);
-                    builder.setMessage(R.string.invalid_login)
-                            .setTitle(R.string.generic_error_occurred)
-                            .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
-            else
-                logInAdmin();
+            String[] userValues = new String[2];
+            userValues[0] = mUsernameEditText.getText().toString();
+            userValues[1] = mPasswordEditText.getText().toString();
+            new CheckUserCredentialsAsync().execute(userValues);
 
         }
         else {
@@ -147,9 +147,51 @@ public class AdminLoginActivity extends AppCompatActivity {
             }
         }
     }
-    private void logInAdmin() {
-        Toast.makeText(mContext,"Ready to log in", Toast.LENGTH_SHORT).show();
-    }
     /*****************************END OF CHECK METHODS*****************************/
+
+    /*****************************************START OF DATABASE METHODS*************************************/
+    class CheckUserCredentialsAsync extends AsyncTask<String, Void, Cursor> {
+        @Override
+        protected Cursor doInBackground(String... params) {
+            String inputUsername = params[0];
+            String inputPassword = params[1];
+            Log.i(LOG_TAG,"In CheckUserCredentials, encoded password: " + Utility.generateEncodedPassword(inputPassword));
+            String[] querySelectionArgs = {inputUsername, Utility.generateEncodedPassword(inputPassword)};
+            String querySelection = UsersContract.UsersEntry.COLUMN_USERNAME + " = ? AND " +
+                    UsersContract.UsersEntry.COLUMN_PASSWORD + " = ?";
+            final String[] USERS_COLUMNS = {
+                    UsersContract.UsersEntry.TABLE_NAME + "." + UsersContract.UsersEntry._ID,
+                    UsersContract.UsersEntry.COLUMN_USERNAME,
+                    UsersContract.UsersEntry.COLUMN_PASSWORD
+            };
+            return mContext.getContentResolver().query(
+                    UsersContract.UsersEntry.CONTENT_URI,
+                    USERS_COLUMNS,
+                    querySelection,
+                    querySelectionArgs,
+                    null
+            );
+        }
+
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            int cursorCount = cursor.getCount();
+            Log.i(LOG_TAG,"cursorCount: " + cursorCount);
+            if (cursorCount == 1) {
+                //TODO: Open the Admin main activity
+                Toast.makeText(mContext,"Valid credentials", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminLoginActivity.this);
+                builder.setMessage(R.string.invalid_login)
+                        .setTitle(R.string.generic_error_occurred)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+
+        }
+    }
+    /*****************************************END OF DATABASE METHODS*************************************/
 
 }

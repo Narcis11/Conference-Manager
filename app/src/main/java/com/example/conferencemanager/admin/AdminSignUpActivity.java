@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.conferencemanager.R;
 import com.example.conferencemanager.Utility;
@@ -228,18 +229,19 @@ public class AdminSignUpActivity extends AppCompatActivity {
             int cursorCount = cursor.getCount();
             Log.i(LOG_TAG,"cursorCount: " + cursorCount);
             if (cursorCount == 0) {
-                Log.i(LOG_TAG, "The user does not exist, proceed further");
+                //Log.i(LOG_TAG, "The user does not exist, proceed further");
                 cancelDialog();
                 //save the new user
                 final String USER_TYPE = "Admin";
                 Vector<ContentValues> cVVector = new Vector<>(3);
                 ContentValues userValues = new ContentValues();
                 userValues.put(UsersContract.UsersEntry.COLUMN_USERNAME, mUsernameEditText.getText().toString());
-                Log.i(LOG_TAG, "Encoded password: " + Utility.generateEncodedPassword(mPasswordEditText.getText().toString()));
+                //Log.i(LOG_TAG, "Encoded password: " + Utility.generateEncodedPassword(mPasswordEditText.getText().toString()));
                 userValues.put(UsersContract.UsersEntry.COLUMN_PASSWORD, Utility.generateEncodedPassword(mPasswordEditText.getText().toString()));
                 userValues.put(UsersContract.UsersEntry.COLUMN_USER_TYPE, USER_TYPE);
-                //userValues[2] = mEmailEditText.getText().toString();
-                //new SaveUsernameAsync().execute(userValues);
+                userValues.put(UsersContract.UsersEntry.COLUMN_EMAIL, mEmailEditText.getText().toString());
+                cVVector.add(userValues);
+                new SaveUsernameAsync().execute(cVVector);
             }
             else {
                 cancelDialog();
@@ -256,8 +258,29 @@ public class AdminSignUpActivity extends AppCompatActivity {
     class SaveUsernameAsync extends AsyncTask<Vector<ContentValues>, Void, Integer> {
         @Override
         protected Integer doInBackground(Vector<ContentValues>... params) {
-            Vector<ContentValues> cVVector = new Vector<>(3);
-            return null;
+            Vector<ContentValues> contentValuesVector = params[0];
+            ContentValues[] cvArray = new ContentValues[contentValuesVector.size()];
+            contentValuesVector.toArray(cvArray);
+            return mContext.getContentResolver().bulkInsert(UsersContract.UsersEntry.CONTENT_URI, cvArray);
+        }
+
+        @Override
+        protected void onPostExecute(Integer rowsInserted) {
+            Log.i(LOG_TAG,"rowsInserted: " + rowsInserted);
+            cancelDialog();
+            if (rowsInserted == 1) {
+                //TODO: Open the Admin main activity
+                Toast.makeText(mContext,"Save successful", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminSignUpActivity.this);
+                builder.setMessage(R.string.signup_user_failed)
+                        .setTitle(R.string.generic_error_occurred)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+
         }
     }
 
