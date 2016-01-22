@@ -293,7 +293,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
             int rowsInserted = mContext.getContentResolver().bulkInsert(UsersContract.ConferencesEntry.CONTENT_URI, cvArray);
-            Log.i(LOG_TAG,"No of rows inserted in the conferences table: " + rowsInserted);
+            //Log.i(LOG_TAG,"No of rows inserted in the conferences table: " + rowsInserted);
             //insert the invites if necessary
             if (params[4].equals(IS_INVITES_CHECKED)) {
                 Vector<ContentValues> invitesVector = new Vector<>(mDoctorsUsernamesList.size());
@@ -308,7 +308,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
                     ContentValues[] cvInvitesArray = new ContentValues[invitesVector.size()];
                     invitesVector.toArray(cvInvitesArray);
                     int invitesInserted = mContext.getContentResolver().bulkInsert(UsersContract.InvitesEntry.CONTENT_URI, cvInvitesArray);
-                    Log.i(LOG_TAG,"invitesInserted: " + invitesInserted);
+                    //Log.i(LOG_TAG,"invitesInserted: " + invitesInserted);
                 }
             }
 

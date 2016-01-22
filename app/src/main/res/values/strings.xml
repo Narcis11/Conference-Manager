@@ -12,7 +12,7 @@
     <string name="signup_button">Sign up</string>
     <string name="no_input">Please complete the field above.</string>
     <string name="invalid_login">Invalid login credentials</string>
-    <string name="generic_error_occurred">An error occurred.</string>
+    <string name="generic_error_occurred">An error occurred</string>
     <string name="signup_user_check">Checking username availability&#8230;</string>
     <string name="signup_user_exists">This username is already registered.</string>
     <string name="signup_user_failed">Failed to create the new user.</string>
@@ -91,6 +91,7 @@
     <string name="doctor_new_topic_description">Description</string>
     <string name="doctor_new_topic_description_hint">Elaborate on your topic</string>
     <string name="doctor_new_topic_button">Add topic</string>
+    <string name="doctor_new_topic_error">Unable to create a new topic. Please try again later.</string>
 
     <!--Activity/Fragment titles-->
     <string name="title_activity_doctor_login">Doctor Log In</string>
