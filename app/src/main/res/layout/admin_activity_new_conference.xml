@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical"
+    tools:context="com.example.conferencemanager.admin.AdminNewConferenceActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.88">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context="com.example.conferencemanager.admin.AdminNewConferenceActivity">
+
+            <!--*******Title********-->
+            <!--Title text view-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_title"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@color/black"
+                android:text="@string/admin_conf_details_title"/>
+
+            <!--Title value-->
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_title_value"
+                android:layout_marginTop="@dimen/activity_vertical_margin_half"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/admin_new_conf_title"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/material_grey_800_local"
+                android:background="@android:color/transparent"
+                android:hint="@string/admin_new_conf_title_hint"
+                android:ellipsize="end"
+                android:maxLines="2"/>
+
+            <!--Title error-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_title_error"
+                android:visibility="invisible"
+                android:layout_below="@+id/admin_new_conf_title_value"
+                android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/colorAccent"
+                tools:text="Cannot be empty"/>
+
+            <!--*******Description********-->
+            <!--Description text view-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_description"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/admin_new_conf_title_error"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@color/black"
+                android:text="@string/admin_conf_details_description"/>
+
+            <!--Description value-->
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_description_value"
+                android:layout_marginTop="@dimen/activity_vertical_margin_half"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/admin_new_conf_description"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/material_grey_800_local"
+                android:background="@android:color/transparent"
+                android:hint="@string/admin_new_conf_description_hint"
+                android:ellipsize="end"
+                android:maxLines="2" />
+
+            <!--Description error-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_description_error"
+                android:visibility="invisible"
+                android:layout_below="@+id/admin_new_conf_description_value"
+                android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/colorAccent"
+                tools:text="Cannot be empty"/>
+
+            <!--*******Address********-->
+            <!--Address text view-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_address"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/admin_new_conf_description_error"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@color/black"
+                android:text="@string/admin_conf_details_address"/>
+
+            <!--Address value-->
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_address_value"
+                android:layout_marginTop="@dimen/activity_vertical_margin_half"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/admin_new_conf_address"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/material_grey_800_local"
+                android:background="@android:color/transparent"
+                android:hint="@string/admin_new_conf_address_hint"
+                android:ellipsize="end"
+                android:maxLines="2" />
+
+            <!--Description error-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_address_error"
+                android:visibility="invisible"
+                android:layout_below="@+id/admin_new_conf_address_value"
+                android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/colorAccent"
+                tools:text="Cannot be empty"/>
+
+            <!--*******Date********-->
+            <!--Date text view-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_date"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/admin_new_conf_address_error"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@color/black"
+                android:text="@string/admin_conf_details_date"/>
+
+            <!--Date value-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_date_value"
+                android:layout_marginTop="@dimen/activity_vertical_margin_half"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/admin_new_conf_date"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/material_grey_800_local"
+                android:background="@android:color/transparent"
+                android:hint="@string/admin_new_conf_date_hint"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:maxLines="1" />
+
+            <!--Date error-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_date_error"
+                android:visibility="invisible"
+                android:layout_below="@+id/admin_new_conf_date_value"
+                android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/colorAccent"
+                tools:text="Cannot be empty"/>
+
+            <!--*********Invites**********-->
+            <!--Invites title-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_invites"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/activity_vertical_margin_half"
+                android:layout_below="@+id/admin_new_conf_date_error"
+                android:textColor="@color/black"
+                android:text="@string/admin_new_conf_invites_title"
+                android:textAppearance="?android:textAppearanceLarge" />
+
+            <!--Shop Mall checkbox-->
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/admin_new_conf_invites_value"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/admin_new_conf_invites"
+                android:layout_marginTop="@dimen/activity_vertical_margin_half" />
+
+        </RelativeLayout>
+    </ScrollView>
+    <!--************Next button************-->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.12"
+        android:id="@+id/admin_new_conf_button"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:textSize="@dimen/Material.Text.Headline.Size"
+        android:text="@string/admin_new_conf_button"
+        android:background="@drawable/button_selector_green"
+        android:padding="@dimen/activity_vertical_margin_half"
+        android:textColor="@color/white" />
+
+</LinearLayout>
