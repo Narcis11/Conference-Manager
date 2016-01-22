@@ -31,11 +31,11 @@
         android:layout_marginTop="@dimen/activity_vertical_margin_half"
         android:layout_below="@+id/admin_fragment_topic_title_row"/>
 
-    <!--Topic date-->
+    <!--Topic description-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/admin_fragment_topic_date_row"
+        android:id="@+id/admin_fragment_topic_description_row"
         android:layout_marginTop="@dimen/activity_vertical_margin_half"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginStart="@dimen/activity_vertical_margin"
