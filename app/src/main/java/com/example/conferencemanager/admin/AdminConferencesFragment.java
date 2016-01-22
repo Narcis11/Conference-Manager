@@ -112,6 +112,7 @@ public class AdminConferencesFragment extends Fragment implements LoaderManager.
                 if (cursor != null && cursor.moveToPosition(position)) {
                     Intent detailsIntent = new Intent(getActivity(), AdminConferenceDetailsActivity.class);
                     Bundle bundle = new Bundle();
+                    bundle.putInt(Constants.BUNDLE_ADMIN_CONF_ID_KEY, cursor.getInt(COL_CONF_ID));
                     bundle.putString(Constants.BUNDLE_ADMIN_CONF_TITLE_KEY, cursor.getString(COL_CONF_TITLE));
                     bundle.putString(Constants.BUNDLE_ADMIN_CONF_ADDRESS_KEY, cursor.getString(COL_CONF_ADDRESS));
                     bundle.putString(Constants.BUNDLE_ADMIN_CONF_DESCRIPTION_KEY, cursor.getString(COL_CONF_DESCRIPTION));

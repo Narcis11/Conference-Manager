@@ -2,8 +2,10 @@ package com.example.conferencemanager.admin;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.content.ContextCompat;
@@ -18,11 +20,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.conferencemanager.R;
+import com.example.conferencemanager.data.UsersContract;
 import com.example.conferencemanager.utilities.Constants;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Vector;
 
 public class AdminConferenceDetailsActivity extends AppCompatActivity{
 
@@ -201,6 +205,13 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
         mDateEditText.setEnabled(false);
 
         mIsEditModeEnabled = false;
+        //save to the database
+        String[] updateArray = new String[4];
+        updateArray[0] = mTitleEditText.getText().toString();
+        updateArray[1] = mDescriptionTextView.getText().toString();
+        updateArray[2] = mAddressEditText.getText().toString();
+        updateArray[3] = mDateEditText.getText().toString();
+        new SaveConferenceDetailsAsync().execute(updateArray);
     }
 
     private void updateConfCalendar(Calendar calendar) {
@@ -211,4 +222,35 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
         mDateEditText.setText(sdf.format(calendar.getTime()));
     }
     /**********************************************************END OF EDIT METHODS****************************************************************/
+
+
+    /**********************************************************START OF ASYNC METHODS****************************************************************/
+    private class SaveConferenceDetailsAsync extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+            Vector<ContentValues> cVVector = new Vector<>(1);
+            ContentValues updateValues = new ContentValues();
+
+            if (!params[0].equals(mTitleInitialValue))
+                updateValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_TITLE, params[0]);
+            if (!params[1].equals(mDescriptionInitialValue))
+                updateValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_DESCRIPTION, params[1]);
+            if (!params[2].equals(mAddressInitialValue))
+                updateValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_ADDRESS, params[2]);
+            if (!params[3].equals(mDateInitialValue))
+                updateValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_DATE, params[3]);
+
+            cVVector.add(updateValues);
+            ContentValues[] cvArray = new ContentValues[cVVector.size()];
+            if (cvArray.length > 0) {
+                cVVector.toArray(cvArray);
+                String querySelection = UsersContract.ConferencesEntry._ID + " = ?";
+                String[] querySelectionArgs = {String.valueOf(mBundle.getInt(Constants.BUNDLE_ADMIN_CONF_ID_KEY))};
+                mContext.getContentResolver().update(UsersContract.ConferencesEntry.CONTENT_URI, cvArray[0], querySelection, querySelectionArgs);
+            }
+            return null;
+        }
+    }
+
+    /**********************************************************END OF ASYNC METHODS****************************************************************/
 }
