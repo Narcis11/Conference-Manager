@@ -287,6 +287,12 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(Integer rowsUpdated) {
             if (rowsUpdated == 0) {
+                //set the edittexts back to their initial value
+                mTitleEditText.setText(mTitleInitialValue);
+                mAddressEditText.setText(mAddressInitialValue);
+                mDescriptionEditText.setText(mDescriptionInitialValue);
+                mDateEditText.setText(mDateInitialValue);
+                //inform the user of the error
                 AlertDialog.Builder builder = new AlertDialog.Builder(AdminConferenceDetailsActivity.this);
                 builder.setMessage(R.string.admin_edit_conf_error)
                         .setTitle(R.string.generic_error_occurred)
