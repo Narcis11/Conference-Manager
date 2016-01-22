@@ -120,33 +120,13 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
                 onAcceptButtonPressed();
             }
             else {//the delete button was pressed
-                AlertDialog.Builder builder = new AlertDialog.Builder(AdminConferenceDetailsActivity.this);
-                builder.setMessage(R.string.admin_delete_conf_dialog_body)
-                        .setTitle(R.string.admin_delete_conf_confirm)
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //Do nothing here because we override this button later to change the close behaviour.
-                                //However, we still need this because on older versions of Android unless we
-                                //pass a handler the button doesn't get instantiated
-                            }
-                        });
-                final AlertDialog dialog = builder.create();
-                dialog.show();
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.i(LOG_TAG,"Ready to delete the conference");
-                        dialog.cancel();
-                    }
-                });
+                deleteConference();
             }
         }
         return super.onOptionsItemSelected(item);
     }
 
-    /**********************************************************START OF EDIT METHODS****************************************************************/
+    /**********************************************************START OF EDIT/DELETE METHODS****************************************************************/
     private void enableEditableMode() {
         Log.i(LOG_TAG, "In enableEditableMode");
         //enable all the edittexts
@@ -247,7 +227,32 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
 
         mDateEditText.setText(sdf.format(calendar.getTime()));
     }
-    /**********************************************************END OF EDIT METHODS****************************************************************/
+
+    private void deleteConference() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AdminConferenceDetailsActivity.this);
+        builder.setMessage(R.string.admin_delete_conf_dialog_body)
+                .setTitle(R.string.admin_delete_conf_confirm)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Do nothing here because we override this button later to change the close behaviour.
+                        //However, we still need this because on older versions of Android unless we
+                        //pass a handler the button doesn't get instantiated
+                    }
+                });
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(LOG_TAG,"Ready to delete the conference");
+                dialog.cancel();
+                new DeleteConferenceAsync().execute();
+            }
+        });
+    }
+    /**********************************************************END OF EDIT/DELETE METHODS****************************************************************/
 
 
     /**********************************************************START OF ASYNC METHODS****************************************************************/
@@ -281,7 +286,7 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
 
         @Override
         protected void onPostExecute(Integer rowsUpdated) {
-            if (rowsUpdated == 0 && rowsUpdated != NO_ROWS_MODIFIED) {
+            if (rowsUpdated == 0) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AdminConferenceDetailsActivity.this);
                 builder.setMessage(R.string.admin_edit_conf_error)
                         .setTitle(R.string.generic_error_occurred)
