@@ -213,6 +213,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/admin_new_conf_invites_value"
+                android:checked="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/admin_new_conf_invites"
@@ -220,6 +221,7 @@
 
         </RelativeLayout>
     </ScrollView>
+
     <!--************Next button************-->
     <Button
         android:layout_width="match_parent"
