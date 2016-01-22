@@ -160,11 +160,9 @@
         android:id="@+id/doctor_signup_button"
         android:textSize="@dimen/Material.Text.Headline.Size"
         android:text="@string/signup_button"
-        android:layout_below="@+id/doctor_signup_fields_layout"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@drawable/button_selector_green"
         android:padding="@dimen/activity_vertical_margin_half"
-        android:layout_alignParentBottom="true"
         android:textColor="@color/white" />
     
 </LinearLayout>
