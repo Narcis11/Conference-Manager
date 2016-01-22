@@ -4,13 +4,13 @@
 
     <item android:id="@+id/action_edit_conf"
         android:title="@string/admin_edit_conf"
-        android:icon="@mipmap/ic_action_edit"
+        android:icon="@drawable/ic_action_edit"
         app:showAsAction="always"
         />
 
     <item android:id="@+id/action_delete_conf"
         android:title="@string/admin_delete_conf"
-        android:icon="@mipmap/ic_action_delete"
+        android:icon="@drawable/ic_action_delete"
         app:showAsAction="always"
         />
 </menu>
