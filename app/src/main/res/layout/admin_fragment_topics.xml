@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.conferencemanager.admin.AdminTopicsFragment">
 
-    <!--The topicss listview-->
+    <!--The topics listview-->
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,6 +25,6 @@
         android:visibility="gone"
         android:textColor="@color/colorAccent"
         android:textAppearance="?android:textAppearanceLarge"
-        android:text="@string/admin_no_topics"/>
+        android:text="@string/no_topics"/>
 
 </FrameLayout>
