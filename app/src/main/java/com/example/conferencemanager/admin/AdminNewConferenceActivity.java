@@ -2,6 +2,7 @@ package com.example.conferencemanager.admin;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -22,11 +24,13 @@ import android.widget.TimePicker;
 import com.example.conferencemanager.R;
 import com.example.conferencemanager.data.UsersContract;
 import com.example.conferencemanager.utilities.Constants;
+import com.example.conferencemanager.utilities.SecurePreferences;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Vector;
 
 public class AdminNewConferenceActivity extends AppCompatActivity {
 
@@ -37,6 +41,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
     private EditText mAddressValue;
     private EditText mDescriptionValue;
     private TextView mDateValue;
+    private CheckBox mInviteValue;
     //the error messages
     private TextView mTitleError;
     private TextView mAddressError;
@@ -48,12 +53,17 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
     private static String EMPTY_FIELD_ERROR = "";
     //the list that stored the doctors' usernames
     private ArrayList<String> mDoctorsUsernamesList = new ArrayList<>();
+    //used to determine whether the invite checkbox is ticked
+    private final String IS_INVITES_CHECKED = "INVITES_CHECKED";
+    //used to get the admin's username
+    private SecurePreferences mSecurePreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_activity_new_conference);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mContext = getApplicationContext();
+        mSecurePreferences = new SecurePreferences(mContext, Constants.PREF_CREDENTIALS, Constants.PREF_CREDENTIALS_KEY, true);
         EMPTY_FIELD_ERROR = getResources().getString(R.string.no_input);
         loadUIElements();
         setOnClickListeners();
@@ -68,6 +78,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
         mAddressValue = (EditText) findViewById(R.id.admin_new_conf_address_value);
         mDescriptionValue = (EditText) findViewById(R.id.admin_new_conf_description_value);
         mDateValue = (TextView) findViewById(R.id.admin_new_conf_date_value);
+        mInviteValue = (CheckBox) findViewById(R.id.admin_new_conf_invites_value);
         //the error textviews
         mTitleError = (TextView) findViewById(R.id.admin_new_conf_title_error);
         mAddressError = (TextView) findViewById(R.id.admin_new_conf_address_error);
@@ -205,7 +216,13 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
     private void checkAllFields() {
         if (checkTitleField() && checkDescriptionField() && checkAddressField() && checkDateField()) {
             Log.i(LOG_TAG,"Ready to save the conference");
-            //String[]
+            String[] confValues = new String[5];
+            confValues[0] = mTitleValue.getText().toString();
+            confValues[1] = mDescriptionValue.getText().toString();
+            confValues[2] = mAddressValue.getText().toString();
+            confValues[3] = mDateValue.getText().toString();
+            confValues[4] = mInviteValue.isChecked() ? IS_INVITES_CHECKED : "";
+            new SaveNewConferenceAsync().execute(confValues);
         }
         else {
             if (!checkTitleField()) {
@@ -251,13 +268,52 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
             if (cursor != null && cursor.moveToFirst()) {
                 for (int i = 0; i < cursor.getCount(); i++) {
                     cursor.moveToPosition(i);
-                    Log.i(LOG_TAG,"Addind doctor: " + cursor.getString(COL_DOCTOR_USERNAME));
+                    //Log.i(LOG_TAG,"Adding doctor: " + cursor.getString(COL_DOCTOR_USERNAME));
                     mDoctorsUsernamesList.add(cursor.getString(COL_DOCTOR_USERNAME));
                 }
             }
         }
     }
 
+    private class SaveNewConferenceAsync extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+            Vector<ContentValues> cVVector = new Vector<>(1);
+            ContentValues confValues = new ContentValues();
+            final String adminUsername = mSecurePreferences.getString(Constants.PREF_ADMIN_USERNAME_KEY);
+
+            confValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_TITLE, params[0]);
+            confValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_DESCRIPTION, params[1]);
+            confValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_ADDRESS, params[2]);
+            confValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_DATE, params[3]);
+            confValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_ADDED_BY, adminUsername);
+
+            cVVector.add(confValues);
+            ContentValues[] cvArray = new ContentValues[cVVector.size()];
+            cVVector.toArray(cvArray);
+            int rowsInserted = mContext.getContentResolver().bulkInsert(UsersContract.ConferencesEntry.CONTENT_URI, cvArray);
+            Log.i(LOG_TAG,"No of rows inserted in the conferences table: " + rowsInserted);
+            //insert the invites if necessary
+            if (params[4].equals(IS_INVITES_CHECKED)) {
+                Vector<ContentValues> invitesVector = new Vector<>(mDoctorsUsernamesList.size());
+                for (int x = 0; x < mDoctorsUsernamesList.size(); x++) {
+                    ContentValues invitesValues = new ContentValues();
+                    invitesValues.put(UsersContract.InvitesEntry.COLUMN_CONF_NAME, params[0]);
+                    invitesValues.put(UsersContract.InvitesEntry.COLUMN_RECIPIENT, mDoctorsUsernamesList.get(x));
+                    invitesValues.put(UsersContract.InvitesEntry.COLUMN_SENDER, adminUsername);
+                    invitesVector.add(invitesValues);
+                }
+                if (invitesVector.size() > 0) {
+                    ContentValues[] cvInvitesArray = new ContentValues[invitesVector.size()];
+                    invitesVector.toArray(cvInvitesArray);
+                    int invitesInserted = mContext.getContentResolver().bulkInsert(UsersContract.InvitesEntry.CONTENT_URI, cvInvitesArray);
+                    Log.i(LOG_TAG,"invitesInserted: " + invitesInserted);
+                }
+            }
+
+            return null;
+        }
+    }
     /*****************************************END OF ASYNC METHODS*************************************/
 
 }

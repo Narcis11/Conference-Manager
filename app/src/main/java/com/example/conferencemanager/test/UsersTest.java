@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.conferencemanager.data.UsersContract;
 import com.example.conferencemanager.data.UsersDbHelper;
+import com.example.conferencemanager.utilities.Constants;
 
 /**
  * Created by Narcis11 on 20/01/2016.
@@ -26,8 +27,8 @@ public class UsersTest extends AndroidTestCase {
 
     public void testInsertUsers() throws Throwable {
         ContentValues insertValues = new ContentValues();
-        insertValues.put(UsersContract.UsersEntry.COLUMN_USERNAME, "test user");
-        insertValues.put(UsersContract.UsersEntry.COLUMN_USER_TYPE, "Admin");
+        insertValues.put(UsersContract.UsersEntry.COLUMN_USERNAME, "Doctor no 2");
+        insertValues.put(UsersContract.UsersEntry.COLUMN_USER_TYPE, Constants.DOCTOR_USER_TYPE);
         Uri insertUri = mContext.getContentResolver().insert(UsersContract.UsersEntry.CONTENT_URI, insertValues);
         long positionId = ContentUris.parseId(insertUri);
         Log.i(LOG_TAG, "Insert uri is: " + insertUri);
