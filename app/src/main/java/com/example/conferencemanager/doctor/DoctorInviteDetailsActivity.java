@@ -133,7 +133,6 @@ public class DoctorInviteDetailsActivity extends AppCompatActivity implements Ac
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.i(LOG_TAG, "In onRequestPermissionsResult, request/result: " + requestCode + "/" + grantResults[0]);
         if (requestCode == CALENDAR_ACCESS_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 String[] calendarValues = new String[4];
@@ -145,6 +144,7 @@ public class DoctorInviteDetailsActivity extends AppCompatActivity implements Ac
             }
             else {
                 //delete the invitation
+                new DeleteInvitationAsync().execute();
             }
         }
     }

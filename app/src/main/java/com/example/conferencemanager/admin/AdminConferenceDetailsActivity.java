@@ -304,16 +304,26 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
     }
 
     private class DeleteConferenceAsync extends AsyncTask<Void, Void, Integer> {
+        final int DELETE_OK = 99;
+        final int DELETE_NOK = 89;
         @Override
         protected Integer doInBackground(Void... params) {
-            String querySelection = UsersContract.ConferencesEntry._ID + " = ?";
-            String[] querySelectionArgs = {String.valueOf(mBundle.getInt(Constants.BUNDLE_ADMIN_CONF_ID_KEY))};
-            return mContext.getContentResolver().delete(UsersContract.ConferencesEntry.CONTENT_URI, querySelection, querySelectionArgs);
+            String querySelectionConf = UsersContract.ConferencesEntry._ID + " = ?";
+            String[] querySelectionConfArgs = {String.valueOf(mBundle.getInt(Constants.BUNDLE_ADMIN_CONF_ID_KEY))};
+            //we first delete from the invites table
+            String querySelectionInvites = UsersContract.InvitesEntry.COLUMN_CONF_NAME + " = ?";
+            String[] querySelectionInvitesArgs = {mBundle.getString(Constants.BUNDLE_ADMIN_CONF_TITLE_KEY)};
+            int noInvitesDeleted = mContext.getContentResolver().delete(UsersContract.InvitesEntry.CONTENT_URI, querySelectionInvites, querySelectionInvitesArgs);
+            int noConfsDeleted = mContext.getContentResolver().delete(UsersContract.ConferencesEntry.CONTENT_URI, querySelectionConf, querySelectionConfArgs);
+            if (noInvitesDeleted == 1 && noConfsDeleted == 1)
+                return DELETE_OK;
+            return DELETE_NOK;
+
         }
 
         @Override
         protected void onPostExecute(Integer rowsDeleted) {
-            if (rowsDeleted == 1) {
+            if (rowsDeleted == DELETE_OK) {
                 //open the main activity
                 Intent mainActivityIntent = new Intent(AdminConferenceDetailsActivity.this, AdminMainActivity.class);
                 //clear the intent stack so that the user can't return to this activity

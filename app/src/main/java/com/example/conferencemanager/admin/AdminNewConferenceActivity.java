@@ -216,7 +216,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
 
     private void checkAllFields() {
         if (checkTitleField() && checkDescriptionField() && checkAddressField() && checkDateField()) {
-            Log.i(LOG_TAG,"Ready to save the conference");
+            //Log.i(LOG_TAG,"Ready to save the conference");
             String[] confValues = new String[5];
             confValues[0] = mTitleValue.getText().toString();
             confValues[1] = mDescriptionValue.getText().toString();
@@ -308,7 +308,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
                     ContentValues[] cvInvitesArray = new ContentValues[invitesVector.size()];
                     invitesVector.toArray(cvInvitesArray);
                     int invitesInserted = mContext.getContentResolver().bulkInsert(UsersContract.InvitesEntry.CONTENT_URI, cvInvitesArray);
-                    //Log.i(LOG_TAG,"invitesInserted: " + invitesInserted);
+                    Log.i(LOG_TAG,"invitesInserted: " + invitesInserted);
                 }
             }
 
