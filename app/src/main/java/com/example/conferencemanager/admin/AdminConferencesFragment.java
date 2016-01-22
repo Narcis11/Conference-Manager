@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SyncStateContract;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -86,6 +87,7 @@ public class AdminConferencesFragment extends Fragment implements LoaderManager.
         // Inflate the layout for this fragment
         mRootView = inflater.inflate(R.layout.admin_fragment_conferences, container, false);
         mListView = (ListView) mRootView.findViewById(R.id.admin_conferences_listview);
+        FloatingActionButton addConferenceButton = (FloatingActionButton) mRootView.findViewById(R.id.admin_conferences_fab);
         mNoConferencesTextView = (TextView) mRootView.findViewById(R.id.admin_conferences_no_rows);
         mListView.setAdapter(mConferencesAdapter);
         mConferencesAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
@@ -121,6 +123,13 @@ public class AdminConferencesFragment extends Fragment implements LoaderManager.
                     startActivity(detailsIntent);
 
                 }
+            }
+        });
+        addConferenceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newConfIntent = new Intent(getActivity(), AdminNewConferenceActivity.class);
+                startActivity(newConfIntent);
             }
         });
         // Inflate the layout for this fragment

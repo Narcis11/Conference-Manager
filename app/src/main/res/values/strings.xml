@@ -41,7 +41,7 @@
     <!--Used in the Conferences fragment-->
     <string name="admin_no_conferences">There are no conferences to display. Click the plus button to schedule a conference.</string>
 
-    <!--Used in the Conference details activity-->
+    <!--Used in the Conference details/new conf activities-->
     <string name="admin_conf_details_title">Title</string>
     <string name="admin_conf_details_description">Details</string>
     <string name="admin_conf_details_address">Address</string>
@@ -52,12 +52,20 @@
     <string name="admin_delete_conf_dialog_body">Are you sure you want to delete this conference?</string>
     <string name="admin_delete_conf_error">Unable to delete this conference. Please try again later.</string>
     <string name="admin_edit_conf_error">Unable to edit this conference. Please try again later.</string>
+
+    <!--Used in the new conference activity-->
+    <string name="admin_new_conf_title_hint">The name of the conference</string>
+    <string name="admin_new_conf_description_hint">What is the conference about?</string>
+    <string name="admin_new_conf_address_hint">Where is it held?</string>
+    <string name="admin_new_conf_date_hint">When is it going to be?</string>
+    <string name="admin_new_conf_invites_title">Send invites to doctors</string>
     <!--Activity/framgment titles-->
     <string name="title_activity_admin_login">Admin Log In</string>
     <string name="title_activity_admin_sign_up">Admin Sign Up</string>
     <string name="title_activity_admin_main"></string>
     <string name="title_fragment_conferences">Conferences</string>
     <string name="title_fragment_topics">Topics</string>
+    <string name="title_activity_admin_new_conference">Schedule a conference</string>
     <!--************************************End of ADMIN section******************************* -->
 
 
@@ -74,8 +82,6 @@
     <string name="title_activity_doctor_login">Doctor Log In</string>
     <string name="title_activity_doctor_main">DoctorMainActivity</string>
     <string name="title_activity_doctor_sign_up">Doctor Sign Up</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_admin_conference_details">AdminConferenceDetailsActivity</string>
     <!--************************************End of DOCTOR section******************************* -->
 </resources>
