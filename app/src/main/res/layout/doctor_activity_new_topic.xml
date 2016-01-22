@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.topicerencemanager.doctor.DoctorNewTopicActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin">
+    <!--*******Title********-->
+    <!--Title text view-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_new_topic_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/black"
+        android:text="@string/doctor_new_topic_title"/>
+
+    <!--Title value-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_new_topic_title_value"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/doctor_new_topic_title"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/material_grey_800_local"
+        android:background="@android:color/transparent"
+        android:hint="@string/doctor_new_topic_title_hint"
+        android:ellipsize="end"
+        android:maxLines="2"/>
+
+    <!--Title error-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_new_topic_title_error"
+        android:visibility="invisible"
+        android:layout_below="@+id/doctor_new_topic_title_value"
+        android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/colorAccent"
+        tools:text="Cannot be empty"/>
+
+    <!--*******Description********-->
+    <!--Description text view-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_new_topic_description"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/doctor_new_topic_title_error"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/black"
+        android:text="@string/doctor_new_topic_description"/>
+
+    <!--Description value-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_new_topic_description_value"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/doctor_new_topic_description"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/material_grey_800_local"
+        android:background="@android:color/transparent"
+        android:hint="@string/doctor_new_topic_description_hint"
+        android:ellipsize="end"
+        android:maxLines="4" />
+
+    <!--Description error-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_new_topic_description_error"
+        android:visibility="invisible"
+        android:layout_below="@+id/doctor_new_topic_description_value"
+        android:layout_marginTop="@dimen/activity_vertical_margin_quarter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/colorAccent"
+        tools:text="Cannot be empty"/>
+
+    </RelativeLayout>
+
+    <!--************Add topic button************-->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_button_height_two"
+        android:id="@+id/doctor_new_topic_button"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:textSize="@dimen/Material.Text.Headline.Size"
+        android:text="@string/doctor_new_topic_button"
+        android:background="@drawable/button_selector_green"
+        android:padding="@dimen/activity_vertical_margin_half"
+        android:textColor="@color/white" />
+
+</RelativeLayout>
