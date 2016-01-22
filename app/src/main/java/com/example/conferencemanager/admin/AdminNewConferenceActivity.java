@@ -132,7 +132,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
     }
 
     private void updateConfCalendar(Calendar calendar) {
-        Log.i(LOG_TAG, "In updateConfCalendar");
+        //Log.i(LOG_TAG, "In updateConfCalendar");
         String dateFormat = "HH:mm, MM/dd/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
         mDateValue.setText(sdf.format(calendar.getTime()));
