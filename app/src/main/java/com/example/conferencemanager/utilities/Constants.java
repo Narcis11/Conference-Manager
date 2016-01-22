@@ -35,4 +35,11 @@ public class Constants {
 
     //used to save the doctor's username in the shared preferences
     public static final String PREF_DOCTOR_USERNAME_KEY = "pref_doctor_username_key";
+
+    //used in bundle communications
+    public static final String BUNDLE_DOCTOR_INVITE_TITLE_KEY = "bundle_doctor_invite_title_key";
+    public static final String BUNDLE_DOCTOR_INVITE_ID_KEY = "bundle_doctor_invite_id_key";
+    public static final String BUNDLE_DOCTOR_INVITE_ADDRESS_KEY = "bundle_doctor_invite_address_key";
+    public static final String BUNDLE_DOCTOR_INVITE_DATE_KEY = "bundle_doctor_invite_date_key";
+    public static final String BUNDLE_DOCTOR_INVITE_DESCRIPTION_KEY = "bundle_doctor_invite_description_key";
 }

@@ -1,22 +1,24 @@
 package com.example.conferencemanager.doctor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.example.conferencemanager.R;
 import com.example.conferencemanager.data.UsersContract;
+import com.example.conferencemanager.utilities.Constants;
 
 /**
  * Used to display the doctor's invites.
@@ -100,6 +102,24 @@ public class DoctorInvitesFragment extends Fragment implements LoaderManager.Loa
                         return true;
                 }
                 return true;
+            }
+        });
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor cursor = mInvitesAdapter.getCursor();
+                if (cursor != null && cursor.moveToPosition(position)) {
+                    Intent detailsIntent = new Intent(getActivity(), DoctorInviteDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(Constants.BUNDLE_DOCTOR_INVITE_ID_KEY, cursor.getInt(COL_INVITE_ID));
+                    bundle.putString(Constants.BUNDLE_DOCTOR_INVITE_TITLE_KEY, cursor.getString(COL_INVITE_TITLE));
+                    bundle.putString(Constants.BUNDLE_DOCTOR_INVITE_ADDRESS_KEY, cursor.getString(COL_INVITE_ADDRESS));
+                    bundle.putString(Constants.BUNDLE_DOCTOR_INVITE_DESCRIPTION_KEY, cursor.getString(COL_INVITE_DESCRIPTION));
+                    bundle.putString(Constants.BUNDLE_DOCTOR_INVITE_DATE_KEY, cursor.getString(COL_INVITE_DATE));
+                    detailsIntent.putExtras(bundle);
+                    startActivity(detailsIntent);
+
+                }
             }
         });
         return mRootView;
