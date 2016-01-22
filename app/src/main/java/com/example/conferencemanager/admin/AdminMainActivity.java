@@ -5,13 +5,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -19,7 +16,6 @@ import android.view.MenuItem;
 
 import com.example.conferencemanager.LandingPageActivity;
 import com.example.conferencemanager.R;
-import com.example.conferencemanager.utilities.Constants;
 import com.example.conferencemanager.utilities.SecurePreferences;
 import com.example.conferencemanager.utilities.SlidingTabLayout;
 
@@ -87,14 +83,12 @@ public class AdminMainActivity extends AppCompatActivity implements AdminConfere
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 
     /***********************************START OF METHODS USED BY THE SLIDING TABS******************************************/
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     * We need to extend FragmentStatePagerAdapter, not FragmentPagerAdapter, so that we are able to swap between List/Map in the
-     * Shops fragment
-     */
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
         private final FragmentManager mFragmentManager;
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -104,11 +98,6 @@ public class AdminMainActivity extends AppCompatActivity implements AdminConfere
         private int NO_OF_PAGES = 2;//the number of tabs
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            //return PlaceholderFragment.newInstance(position + 1);
-            //   Log.i(LOG_TAG, "In getItem, WHICH_SHOPS_FRAGMENT: " + Constants.WHICH_SHOPS_FRAGMENT);
-            //if you need to send parameters to the fragments, do it through newInstance
             switch (position) {
                 case 0: return AdminConferencesFragment.newInstance();
                 case 1: return AdminTopicsFragment.newInstance();
@@ -121,41 +110,17 @@ public class AdminMainActivity extends AppCompatActivity implements AdminConfere
             return NO_OF_PAGES;
         }
 
-        //used to update the UI
-        @Override
-        public int getItemPosition(Object object) {
-            //this implementation recreates all the Views, which is not very efficient
-            // Log.i(LOG_TAG," In getItemPosition");
-
-
-   /*         if (object instanceof UpdateableSetupFragment)
-                ((UpdateableSetupFragment) object).onSetupFragmentUpdate();
-            if (object instanceof  UpdateableMapFragment)
-                ((UpdateableMapFragment) object).onMapFragmentUpdate();*/
-            return super.getItemPosition(object);
-
-        }
-
-
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return getString(R.string.title_fragment_conferences);
+                    return getString(R.string.title_admin_fragment_conferences);
                 case 1:
-                    return getString(R.string.title_fragment_topics);
+                    return getString(R.string.title_admin_fragment_topics);
                 default:
-                    return getString(R.string.title_fragment_conferences);
+                    return getString(R.string.title_admin_fragment_conferences);
             }
         }
-    }
-
-    //the method used for communicating with the fragments
-
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     /***********************************END OF METHODS USED BY THE SLIDING TABS******************************************/
