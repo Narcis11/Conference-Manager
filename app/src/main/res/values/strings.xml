@@ -103,6 +103,8 @@
     <string name="doctor_invite_details_date">Date</string>
     <string name="doctor_invite_details_accept">Accept</string>
     <string name="doctor_invite_details_decline">Decline</string>
+    <string name="doctor_invite_error">Unable to process the invitation. Please try again later.</string>
+
     <!--Activity/Fragment titles-->
     <string name="title_activity_doctor_login">Doctor Log In</string>
     <string name="title_activity_doctor_main"></string>

@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.provider.CalendarContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -20,8 +21,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.conferencemanager.R;
+import com.example.conferencemanager.admin.AdminMainActivity;
 import com.example.conferencemanager.data.UsersContract;
 import com.example.conferencemanager.utilities.Constants;
+import com.example.conferencemanager.utilities.SecurePreferences;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,7 +54,8 @@ public class DoctorInviteDetailsActivity extends AppCompatActivity implements Ac
     private Button mDeclineButton;
     //the code when requesting the right to access the calendar
     final int CALENDAR_ACCESS_CODE = 99;
-
+    //used to get the admin's username
+    private SecurePreferences mSecurePreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,7 @@ public class DoctorInviteDetailsActivity extends AppCompatActivity implements Ac
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mBundle = getIntent().getExtras();
         mContext = getApplicationContext();
+        mSecurePreferences = new SecurePreferences(mContext, Constants.PREF_CREDENTIALS, Constants.PREF_CREDENTIALS_KEY, true);
         String actionBarTitle = mBundle.getString(Constants.BUNDLE_DOCTOR_INVITE_TITLE_KEY);
         getSupportActionBar().setTitle(actionBarTitle);
         loadUiElements();
@@ -133,7 +138,17 @@ public class DoctorInviteDetailsActivity extends AppCompatActivity implements Ac
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.i(LOG_TAG, "In onRequestPermissionsResult, request/result: " + requestCode + "/" + grantResults[0]);
         if (requestCode == CALENDAR_ACCESS_CODE) {
-            
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                String[] calendarValues = new String[4];
+                calendarValues[0] = mTitleEditText.getText().toString();
+                calendarValues[1] = mDescriptionEditText.getText().toString();
+                calendarValues[2] = mAddressEditText.getText().toString();
+                calendarValues[3] = mDateEditText.getText().toString();
+                new SaveToCalendarAsync().execute(calendarValues);
+            }
+            else {
+                //delete the invitation
+            }
         }
     }
 
@@ -180,12 +195,50 @@ public class DoctorInviteDetailsActivity extends AppCompatActivity implements Ac
 
         @Override
         protected void onPostExecute(Integer insertResult) {
-            if (insertResult == 1) {
+            if (insertResult == 1 || insertResult == CALENDAR_WRITE_DENIED) {
                 Log.i(LOG_TAG,"Calendar insert successful");
                 //even though the event was not added to the calendar, we still continue with the acceptance procedure
+                new DeleteInvitationAsync().execute();
             }
-            else if (insertResult == CALENDAR_WRITE_DENIED) {
-                Log.i(LOG_TAG,"Calendar insert DENIED");
+            else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(DoctorInviteDetailsActivity.this);
+                builder.setMessage(R.string.doctor_invite_error)
+                        .setTitle(R.string.generic_error_occurred)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        }
+    }
+
+    private class DeleteInvitationAsync extends AsyncTask<Void, Void, Integer> {
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+            String whereClause = UsersContract.InvitesEntry.COLUMN_RECIPIENT + " = ?";
+            String[] whereArgs = {mSecurePreferences.getString(Constants.PREF_DOCTOR_USERNAME_KEY)};
+            int rowsDeleted = mContext.getContentResolver().delete(UsersContract.InvitesEntry.CONTENT_URI, whereClause, whereArgs);
+            Log.i(LOG_TAG,"rowsDeleted: " + rowsDeleted);
+            return rowsDeleted;
+        }
+
+        @Override
+        protected void onPostExecute(Integer rowsDeleted) {
+            if (rowsDeleted == 1) {
+                //open the main activity
+                Intent mainActivityIntent = new Intent(DoctorInviteDetailsActivity.this, AdminMainActivity.class);
+                //clear the intent stack so that the user can't return to this activity
+                mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(mainActivityIntent);
+            }
+            else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(DoctorInviteDetailsActivity.this);
+                builder.setMessage(R.string.doctor_invite_error)
+                        .setTitle(R.string.generic_error_occurred)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         }
     }
