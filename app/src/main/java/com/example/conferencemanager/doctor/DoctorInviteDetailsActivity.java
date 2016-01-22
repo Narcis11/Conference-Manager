@@ -124,13 +124,10 @@ public class DoctorInviteDetailsActivity extends AppCompatActivity implements Ac
             calendarValues[3] = mDateEditText.getText().toString();
             new SaveToCalendarAsync().execute(calendarValues);
         }
-        //TODO: delete the invitation for this doctor
-        //TODO: open the main activity
     }
 
     private void declineInvitation() {
-        //TODO: delete the invitation for this doctor
-        //TODO: open the main activity
+        new DeleteInvitationAsync().execute();
     }
 
     @Override
@@ -197,7 +194,8 @@ public class DoctorInviteDetailsActivity extends AppCompatActivity implements Ac
         protected void onPostExecute(Integer insertResult) {
             if (insertResult == 1 || insertResult == CALENDAR_WRITE_DENIED) {
                 Log.i(LOG_TAG,"Calendar insert successful");
-                //even though the event was not added to the calendar, we still continue with the acceptance procedure
+                //irrespective of the event being added to the calendar, we still continue with the acceptance procedure
+                String[] invitationValues = {mTitleEditText.getText().toString()};
                 new DeleteInvitationAsync().execute();
             }
             else {
@@ -226,7 +224,7 @@ public class DoctorInviteDetailsActivity extends AppCompatActivity implements Ac
         protected void onPostExecute(Integer rowsDeleted) {
             if (rowsDeleted == 1) {
                 //open the main activity
-                Intent mainActivityIntent = new Intent(DoctorInviteDetailsActivity.this, AdminMainActivity.class);
+                Intent mainActivityIntent = new Intent(DoctorInviteDetailsActivity.this, DoctorMainActivity.class);
                 //clear the intent stack so that the user can't return to this activity
                 mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

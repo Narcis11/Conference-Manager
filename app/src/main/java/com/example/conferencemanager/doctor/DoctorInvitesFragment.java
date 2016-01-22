@@ -166,10 +166,9 @@ public class DoctorInvitesFragment extends Fragment implements LoaderManager.Loa
         getLoaderManager().initLoader(LOADER_ID, null, this);
 
     }
-    
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Log.i(LOG_TAG,"In onCreateLoader");
         String querySelection = UsersContract.ConferencesEntry.COLUMN_CONF_TITLE + " IN (?)";
         String querySelectionArgs[] = new String[mInviteConferences.size()];
         for (int j = 0; j < querySelectionArgs.length; j++) {
@@ -236,9 +235,9 @@ public class DoctorInvitesFragment extends Fragment implements LoaderManager.Loa
                     cursor.moveToPosition(i);
                     mInviteConferences.add(cursor.getString(COL_INVITE_CONF_NAME));
                 }
-                //initialise the loader after we have the invites
-                initialiseLoader();
             }
+            //initialise the loader after we have the invites (even if there are 0)
+            initialiseLoader();
         }
     }
     /************************************************END OF ASYNC METHODS**********************************************/
