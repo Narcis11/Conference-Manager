@@ -17,7 +17,8 @@ import com.example.conferencemanager.utilities.Constants;
 public class AdminConferenceDetailsActivity extends AppCompatActivity{
 
     private static final String LOG_TAG = AdminConferenceDetailsActivity.class.getSimpleName();
-    Bundle mBundle;
+    private Bundle mBundle;
+    private Menu mMenu;
     //the titles
     private TextView mTitleTextView;
     private TextView mAddressTextView;
@@ -53,6 +54,7 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        mMenu = menu;
         getMenuInflater().inflate(R.menu.admin_menu_conf_details, menu);
         return true;
     }
@@ -62,6 +64,7 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
         int id = item.getItemId();
         if (id == R.id.action_edit_conf) {
             Log.i(LOG_TAG,"Clicked on the edit button");
+            //enable all the edittexts
         }
         else if (id == R.id.action_delete_conf) {
             Log.i(LOG_TAG,"Clicked on the delete button");
