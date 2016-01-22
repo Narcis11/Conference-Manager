@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
@@ -312,6 +313,16 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
             }
 
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            //open the main activity
+            Intent mainActivityIntent = new Intent(AdminNewConferenceActivity.this, AdminMainActivity.class);
+            //clear the intent stack so that the user can't return to this activity
+            mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(mainActivityIntent);
         }
     }
     /*****************************************END OF ASYNC METHODS*************************************/
