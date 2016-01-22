@@ -93,6 +93,9 @@
     <string name="doctor_new_topic_button">Add topic</string>
     <string name="doctor_new_topic_error">Unable to create a new topic. Please try again later.</string>
 
+    <!--Used in the invites fragment-->
+    <string name="doctor_no_invites">You have no invitations at the moment.</string>
+
     <!--Activity/Fragment titles-->
     <string name="title_activity_doctor_login">Doctor Log In</string>
     <string name="title_activity_doctor_main"></string>
