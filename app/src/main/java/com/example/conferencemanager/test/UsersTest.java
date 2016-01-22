@@ -36,6 +36,17 @@ public class UsersTest extends AndroidTestCase {
         assertTrue(positionId != -1);
     }
 
+    public void testInsertTopics() throws Throwable {
+        ContentValues insertValues = new ContentValues();
+        insertValues.put(UsersContract.TopicsEntry.COLUMN_TOPIC_TITLE, "A new topic");
+        insertValues.put(UsersContract.TopicsEntry.COLUMN_TOPIC_DESCRIPTION, "The new research against cancer");
+        Uri insertUri = mContext.getContentResolver().insert(UsersContract.TopicsEntry.CONTENT_URI, insertValues);
+        long positionId = ContentUris.parseId(insertUri);
+        Log.i(LOG_TAG, "Insert uri is: " + insertUri);
+        Log.i(LOG_TAG, "Row number inserted = " + positionId);
+        assertTrue(positionId != -1);
+    }
+
     public void testInsertConferences() throws Throwable {
         ContentValues insertValues = new ContentValues();
         insertValues.put(UsersContract.ConferencesEntry.COLUMN_CONF_TITLE, "Test conference");

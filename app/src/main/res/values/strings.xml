@@ -85,7 +85,7 @@
 
     <!--Activity/Fragment titles-->
     <string name="title_activity_doctor_login">Doctor Log In</string>
-    <string name="title_activity_doctor_main">DoctorMainActivity</string>
+    <string name="title_activity_doctor_main"></string>
     <string name="title_activity_doctor_sign_up">Doctor Sign Up</string>
     <string name="title_activity_admin_conference_details">AdminConferenceDetailsActivity</string>
     <!--************************************End of DOCTOR section******************************* -->

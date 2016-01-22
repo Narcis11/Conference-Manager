@@ -265,6 +265,8 @@ public class DoctorSignUpActivity extends AppCompatActivity {
             if (rowsInserted == 1) {
                 //save the login
                 mSecurePreferences.put(Constants.PREF_IS_DOCTOR_LOGGED_IN_KEY, Constants.PREF_IS_DOCTOR_LOGGED_IN_TRUE);
+                //save the username
+                mSecurePreferences.put(Constants.PREF_DOCTOR_USERNAME_KEY, mUsernameEditText.getText().toString());
                 //open the main activity
                 Intent mainActivityIntent = new Intent(DoctorSignUpActivity.this, DoctorMainActivity.class);
                 //clear the intent stack so that the user can't return to this activity

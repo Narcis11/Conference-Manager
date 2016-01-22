@@ -32,4 +32,7 @@ public class Constants {
     //used to determine whether the doctor is already logged in
     public static final String PREF_IS_DOCTOR_LOGGED_IN_KEY = "pref_is_doctor_logged_in_key";
     public static final String PREF_IS_DOCTOR_LOGGED_IN_TRUE = "pref_is_doctor_logged_in_true";
+
+    //used to save the doctor's username in the shared preferences
+    public static final String PREF_DOCTOR_USERNAME_KEY = "pref_doctor_username_key";
 }
