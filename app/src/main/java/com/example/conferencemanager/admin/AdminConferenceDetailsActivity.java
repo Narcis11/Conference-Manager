@@ -4,11 +4,13 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -115,6 +117,29 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
             /*ACCEPT*/
             if (mIsEditModeEnabled) {//we are in editable mode, and the "accept" button is pressed
                 onAcceptButtonPressed();
+            }
+            else {//the delete button was pressed
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminConferenceDetailsActivity.this);
+                builder.setMessage(R.string.admin_delete_conf_dialog_body)
+                        .setTitle(R.string.admin_delete_conf_confirm)
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Do nothing here because we override this button later to change the close behaviour.
+                                //However, we still need this because on older versions of Android unless we
+                                //pass a handler the button doesn't get instantiated
+                            }
+                        });
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i(LOG_TAG,"Ready to delete the conference");
+                        dialog.cancel();
+                    }
+                });
             }
         }
         return super.onOptionsItemSelected(item);
@@ -242,7 +267,8 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
 
             cVVector.add(updateValues);
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
-            if (cvArray.length > 0) {
+            Log.i(LOG_TAG,"updateValues.size(): " + updateValues.size());
+            if (updateValues.size() > 0) {
                 cVVector.toArray(cvArray);
                 String querySelection = UsersContract.ConferencesEntry._ID + " = ?";
                 String[] querySelectionArgs = {String.valueOf(mBundle.getInt(Constants.BUNDLE_ADMIN_CONF_ID_KEY))};
@@ -251,6 +277,8 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
             return null;
         }
     }
+
+
 
     /**********************************************************END OF ASYNC METHODS****************************************************************/
 }

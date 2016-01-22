@@ -48,6 +48,8 @@
     <string name="admin_conf_details_date">Date</string>
     <string name="admin_edit_conf">Edit conference</string>
     <string name="admin_delete_conf">Delete conference</string>
+    <string name="admin_delete_conf_confirm">Wait a moment</string>
+    <string name="admin_delete_conf_dialog_body">Are you sure you want to delete this conference?</string>
     <!--Activity/framgment titles-->
     <string name="title_activity_admin_login">Admin Log In</string>
     <string name="title_activity_admin_sign_up">Admin Sign Up</string>
