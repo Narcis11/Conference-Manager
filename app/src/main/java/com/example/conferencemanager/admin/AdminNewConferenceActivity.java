@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.content.ContextCompat;
@@ -51,6 +52,9 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
         EMPTY_FIELD_ERROR = getResources().getString(R.string.no_input);
         loadUIElements();
         setOnClickListeners();
+        //get the admin's username
+
+        //get the list of doctors
     }
 
     /**************************************START OF UI/onClick METHODS*****************************************/
@@ -133,7 +137,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
             if (mTitleError.getVisibility() == View.VISIBLE) {
                 mTitleError.setVisibility(View.INVISIBLE);
                 mTitleError.setText("");
-                mTitleValue.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mTitleValue.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800_local), PorterDuff.Mode.SRC_IN);
                 return true;
             }
         }
@@ -151,7 +155,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
             if (mDescriptionError.getVisibility() == View.VISIBLE) {
                 mDescriptionError.setVisibility(View.INVISIBLE);
                 mDescriptionError.setText("");
-                mDescriptionValue.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mDescriptionValue.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800_local), PorterDuff.Mode.SRC_IN);
                 return true;
             }
         }
@@ -169,7 +173,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
             if (mAddressError.getVisibility() == View.VISIBLE) {
                 mAddressError.setVisibility(View.INVISIBLE);
                 mAddressError.setText("");
-                mAddressValue.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mAddressValue.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800_local), PorterDuff.Mode.SRC_IN);
                 return true;
             }
         }
@@ -187,7 +191,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
             if (mDateError.getVisibility() == View.VISIBLE) {
                 mDateError.setVisibility(View.INVISIBLE);
                 mDateError.setText("");
-                mDateValue.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mDateValue.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800_local), PorterDuff.Mode.SRC_IN);
                 return true;
             }
         }
@@ -197,6 +201,7 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
     private void checkAllFields() {
         if (checkTitleField() && checkDescriptionField() && checkAddressField() && checkDateField()) {
             Log.i(LOG_TAG,"Ready to save the conference");
+            //String[]
         }
         else {
             if (!checkTitleField()) {
@@ -214,5 +219,11 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
         }
     }
     /*****************************************END OF CHECK METHODS*************************************/
+
+
+    /*****************************************START OF ASYNC METHODS*************************************/
+
+
+    /*****************************************END OF ASYNC METHODS*************************************/
 
 }

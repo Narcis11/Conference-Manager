@@ -98,7 +98,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
             if (mUsernameError.getVisibility() == View.VISIBLE) {
                 mUsernameError.setVisibility(View.INVISIBLE);
                 mUsernameError.setText("");
-                mUsernameEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mUsernameEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800_local), PorterDuff.Mode.SRC_IN);
                 return true;
             }
         }
@@ -122,7 +122,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
             if (mPasswordError.getVisibility() == View.VISIBLE) {
                 mPasswordError.setVisibility(View.INVISIBLE);
                 mPasswordError.setText("");
-                mPasswordEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mPasswordEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800_local), PorterDuff.Mode.SRC_IN);
                 return true;
             }
         }
@@ -146,7 +146,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
             if (mConfirmPasswordError.getVisibility() == View.VISIBLE) {
                 mConfirmPasswordError.setVisibility(View.INVISIBLE);
                 mConfirmPasswordError.setText("");
-                mConfirmPasswordEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mConfirmPasswordEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800_local), PorterDuff.Mode.SRC_IN);
                 return true;
             }
         }
@@ -170,7 +170,7 @@ public class AdminSignUpActivity extends AppCompatActivity {
             if (mEmailError.getVisibility() == View.VISIBLE) {
                 mEmailError.setVisibility(View.INVISIBLE);
                 mEmailError.setText("");
-                mEmailEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800), PorterDuff.Mode.SRC_IN);
+                mEmailEditText.getBackground().setColorFilter(ContextCompat.getColor(mContext, R.color.material_grey_800_local), PorterDuff.Mode.SRC_IN);
             }
         }
         return true;
@@ -263,6 +263,8 @@ public class AdminSignUpActivity extends AppCompatActivity {
             if (rowsInserted == 1) {
                 //save the login
                 mSecurePreferences.put(Constants.PREF_IS_ADMIN_LOGGED_IN_KEY, Constants.PREF_IS_ADMIN_LOGGED_IN_TRUE);
+                //save the admin's username
+                mSecurePreferences.put(Constants.PREF_ADMIN_USERNAME_KEY, mUsernameEditText.getText().toString());
                 //open the main activity
                 Intent mainActivityIntent = new Intent(AdminSignUpActivity.this, AdminMainActivity.class);
                 //clear the intent stack so that the user can't return to this activity

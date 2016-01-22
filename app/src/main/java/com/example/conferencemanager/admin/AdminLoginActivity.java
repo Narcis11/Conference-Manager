@@ -173,6 +173,8 @@ public class AdminLoginActivity extends AppCompatActivity {
             if (cursorCount == 1) {
                 //save the login
                 mSecurePreferences.put(Constants.PREF_IS_ADMIN_LOGGED_IN_KEY, Constants.PREF_IS_ADMIN_LOGGED_IN_TRUE);
+                //save the admin's username
+                mSecurePreferences.put(Constants.PREF_ADMIN_USERNAME_KEY, mUsernameEditText.getText().toString());
                 //open the main activity
                 Intent mainActivityIntent = new Intent(AdminLoginActivity.this, AdminMainActivity.class);
                 //clear the intent stack so that the user can't return to this activity
