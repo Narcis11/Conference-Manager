@@ -1,21 +1,50 @@
 package com.example.conferencemanager.doctor;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import com.example.conferencemanager.R;
+import com.example.conferencemanager.data.UsersContract;
 
 /**
  * Used to display the doctor's invites.
  */
-public class DoctorInvitesFragment extends Fragment {
+public class DoctorInvitesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     private OnFragmentInteractionListener mListener;
-
+    private Context mContext;
+    private View mRootView;
+    private ListView mListView;
+    private SimpleCursorAdapter mInvitesAdapter;
+    private TextView mNoInvitesTextView;
+    //Used for the database queries
+    private static final String[] INVITES_COLUMNS = {
+            UsersContract.ConferencesEntry.TABLE_NAME + "." + UsersContract.ConferencesEntry._ID,
+            UsersContract.ConferencesEntry.COLUMN_CONF_TITLE,
+            UsersContract.ConferencesEntry.COLUMN_CONF_ADDRESS,
+            UsersContract.ConferencesEntry.COLUMN_CONF_DATE,
+            UsersContract.ConferencesEntry.COLUMN_CONF_DESCRIPTION
+    };
+    //indices for each column
+    private static final int COL_INVITE_ID = 0;
+    private static final int COL_INVITE_TITLE = 1;
+    private static final int COL_INVITE_ADDRESS = 2;
+    private static final int COL_INVITE_DATE = 3;
+    private static final int COL_INVITE_DESCRIPTION = 4;
+    //loader identifier
+    private static final int INVITES_LOADER_ID = 1;
+    
     public DoctorInvitesFragment() {
         // Required empty public constructor
     }
@@ -28,13 +57,52 @@ public class DoctorInvitesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = getActivity().getApplicationContext();
+        getLoaderManager().initLoader(INVITES_LOADER_ID, null, this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mInvitesAdapter = new SimpleCursorAdapter(
+                getActivity(),
+                R.layout.doctor_fragment_invites_row,
+                null,
+                new String[] {
+                        UsersContract.ConferencesEntry.COLUMN_CONF_TITLE,
+                        UsersContract.ConferencesEntry.COLUMN_CONF_ADDRESS,
+                        UsersContract.ConferencesEntry.COLUMN_CONF_DATE
+                },
+                new int[] {
+                        R.id.doctor_fragment_invite_title_row,
+                        R.id.doctor_fragment_invite_address_row,
+                        R.id.doctor_fragment_invite_date_row,
+                },
+                0
+        );
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.doctor_fragment_invites, container, false);
+        mRootView = inflater.inflate(R.layout.doctor_fragment_invites, container, false);
+        mListView = (ListView) mRootView.findViewById(R.id.doctor_invites_listview);
+        mNoInvitesTextView = (TextView) mRootView.findViewById(R.id.doctor_invites_no_rows);
+        mListView.setAdapter(mInvitesAdapter);
+        mInvitesAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                switch (columnIndex) {
+                    case COL_INVITE_TITLE:
+                        ((TextView) view).setText(cursor.getString(COL_INVITE_TITLE));
+                        return true;
+                    case COL_INVITE_DATE:
+                        ((TextView) view).setText(cursor.getString(COL_INVITE_DATE));
+                        return true;
+                    case COL_INVITE_ADDRESS:
+                        ((TextView) view).setText(cursor.getString(COL_INVITE_ADDRESS));
+                        return true;
+                }
+                return true;
+            }
+        });
+        return mRootView;
     }
 
     @Override
@@ -58,4 +126,39 @@ public class DoctorInvitesFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    /************************************************START OF DATABASE METHODS**********************************************/
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new android.support.v4.content.CursorLoader(
+                mContext,
+                UsersContract.ConferencesEntry.CONTENT_URI,
+                INVITES_COLUMNS,
+                null,
+                null,
+                UsersContract.ConferencesEntry.SORT_ORDER
+        );
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mInvitesAdapter.swapCursor(data);
+        //display a message if no conferences are available
+        if (data.getCount() > 0) {
+            if (mListView.getVisibility() != View.VISIBLE)
+                mListView.setVisibility(View.VISIBLE);
+            if (mNoInvitesTextView.getVisibility() == View.VISIBLE)
+                mNoInvitesTextView.setVisibility(View.GONE);
+        }
+        else {
+            mListView.setVisibility(View.GONE);
+            mNoInvitesTextView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mInvitesAdapter.swapCursor(null);
+    }
+    /************************************************END OF DATABASE METHODS**********************************************/
 }
