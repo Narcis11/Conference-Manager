@@ -15,7 +15,7 @@
         android:divider="@color/material_grey_300_local"
         android:background="@drawable/listview_style"/>
 
-    <!--No orders textview-->
+    <!--No conferences textview-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

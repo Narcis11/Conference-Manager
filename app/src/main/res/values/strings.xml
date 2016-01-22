@@ -60,6 +60,10 @@
     <string name="admin_new_conf_date_hint">When is it going to be? Click to edit.</string>
     <string name="admin_new_conf_invites_title">Send invites to doctors</string>
     <string name="admin_new_conf_button">Add conference</string>
+
+    <!--Used in the topics fragment-->
+    <string name="admin_no_topics">There are no topics available to display.</string>
+
     <!--Activity/framgment titles-->
     <string name="title_activity_admin_login">Admin Log In</string>
     <string name="title_activity_admin_sign_up">Admin Sign Up</string>
