@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Topic title-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_fragment_topic_title_row"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        tools:text="Topic title which can be very long at times"/>
+
+    <!--Divider-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/material_grey_300_local"
+        android:id="@+id/doctor_fragment_topic_divider_row"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:layout_below="@+id/doctor_fragment_topic_title_row"/>
+
+    <!--Topic description-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_fragment_topic_description_row"
+        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_below="@+id/doctor_fragment_topic_divider_row"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:textColor="@color/material_grey_800_local"
+        tools:text="1-22 12:46:00.853 22319-22326/com.example.conferencemanager W/art: Suspending all threads took: 6.413ms"/>
+    
+</RelativeLayout>
