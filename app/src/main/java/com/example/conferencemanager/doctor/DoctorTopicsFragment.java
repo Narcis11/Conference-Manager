@@ -1,9 +1,11 @@
 package com.example.conferencemanager.doctor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -77,17 +79,31 @@ public class DoctorTopicsFragment extends Fragment implements LoaderManager.Load
         // Inflate the layout for this fragment
         mRootView = inflater.inflate(R.layout.doctor_fragment_topics, container, false);
         mListView = (ListView) mRootView.findViewById(R.id.doctor_topics_listview);
+        FloatingActionButton addTopicButton = (FloatingActionButton) mRootView.findViewById(R.id.doctor_topics_fab);
         mNoTopicsTextView = (TextView) mRootView.findViewById(R.id.doctor_topics_no_rows);
         mListView.setAdapter(mTopicsAdapter);
         mTopicsAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
             @Override
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
                 switch (columnIndex) {
-                    case COL_TOPIC_ID: ((TextView) view).setText(cursor.getString(COL_TOPIC_ID)); return true;
-                    case COL_TOPIC_TITLE: ((TextView) view).setText(cursor.getString(COL_TOPIC_TITLE)); return true;
-                    case COL_TOPIC_DESCRIPTION: ((TextView) view).setText(cursor.getString(COL_TOPIC_DESCRIPTION)); return true;
+                    case COL_TOPIC_ID:
+                        ((TextView) view).setText(cursor.getString(COL_TOPIC_ID));
+                        return true;
+                    case COL_TOPIC_TITLE:
+                        ((TextView) view).setText(cursor.getString(COL_TOPIC_TITLE));
+                        return true;
+                    case COL_TOPIC_DESCRIPTION:
+                        ((TextView) view).setText(cursor.getString(COL_TOPIC_DESCRIPTION));
+                        return true;
                 }
                 return true;
+            }
+        });
+        addTopicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newTopicIntent = new Intent(getActivity(), DoctorNewTopicActivity.class);
+                startActivity(newTopicIntent);
             }
         });
         return mRootView;

@@ -80,6 +80,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.conferencemanager.admin.AdminMainActivity" />
         </activity>
+        <activity
+            android:name=".doctor.DoctorNewTopicActivity"
+            android:label="@string/title_activity_doctor_new_topic"
+            android:parentActivityName=".doctor.DoctorMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.conferencemanager.doctor.DoctorMainActivity" />
+        </activity>
     </application>
 
 </manifest>
