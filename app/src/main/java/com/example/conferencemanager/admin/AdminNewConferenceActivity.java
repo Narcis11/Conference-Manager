@@ -3,6 +3,7 @@ package com.example.conferencemanager.admin;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,8 +20,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.conferencemanager.R;
+import com.example.conferencemanager.data.UsersContract;
+import com.example.conferencemanager.utilities.Constants;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -42,7 +46,8 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
     private Button mAddConferenceButton;
     //generic error message
     private static String EMPTY_FIELD_ERROR = "";
-
+    //the list that stored the doctors' usernames
+    private ArrayList<String> mDoctorsUsernamesList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +57,8 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
         EMPTY_FIELD_ERROR = getResources().getString(R.string.no_input);
         loadUIElements();
         setOnClickListeners();
-        //get the admin's username
-
         //get the list of doctors
+        new GetDoctorsListAsync().execute();
     }
 
     /**************************************START OF UI/onClick METHODS*****************************************/
@@ -222,7 +226,37 @@ public class AdminNewConferenceActivity extends AppCompatActivity {
 
 
     /*****************************************START OF ASYNC METHODS*************************************/
+    private class GetDoctorsListAsync extends AsyncTask<Void, Void, Cursor> {
+        @Override
+        protected Cursor doInBackground(Void... params) {
+            final String[] DOCTORS_COLUMNS = {
+                    UsersContract.UsersEntry.TABLE_NAME + "." + UsersContract.UsersEntry._ID,
+                    UsersContract.UsersEntry.COLUMN_USERNAME
+            };
+            final String querySelection = UsersContract.UsersEntry.COLUMN_USER_TYPE + " = ?";
+            final String[] querySelectionArgs = {Constants.DOCTOR_USER_TYPE};
+            return mContext.getContentResolver().query(
+                    UsersContract.UsersEntry.CONTENT_URI,
+                    DOCTORS_COLUMNS,
+                    querySelection,
+                    querySelectionArgs,
+                    null
+            );
+        }
 
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            super.onPostExecute(cursor);
+            final int COL_DOCTOR_USERNAME = 1;
+            if (cursor != null && cursor.moveToFirst()) {
+                for (int i = 0; i < cursor.getCount(); i++) {
+                    cursor.moveToPosition(i);
+                    Log.i(LOG_TAG,"Addind doctor: " + cursor.getString(COL_DOCTOR_USERNAME));
+                    mDoctorsUsernamesList.add(cursor.getString(COL_DOCTOR_USERNAME));
+                }
+            }
+        }
+    }
 
     /*****************************************END OF ASYNC METHODS*************************************/
 
