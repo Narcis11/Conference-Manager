@@ -57,7 +57,7 @@
     <string name="admin_new_conf_title_hint">The name of the conference</string>
     <string name="admin_new_conf_description_hint">What is the conference about?</string>
     <string name="admin_new_conf_address_hint">Where is it held?</string>
-    <string name="admin_new_conf_date_hint">When is it going to be?</string>
+    <string name="admin_new_conf_date_hint">When is it going to be? Click to edit.</string>
     <string name="admin_new_conf_invites_title">Send invites to doctors</string>
     <string name="admin_new_conf_button">Add conference</string>
     <!--Activity/framgment titles-->
