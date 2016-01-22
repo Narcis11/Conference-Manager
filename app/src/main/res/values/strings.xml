@@ -84,6 +84,13 @@
     <!--Used in the Login Page-->
     <string name="doctor_username_hint">Username</string>
     <string name="doctor_password_hint">Password</string>
+    
+    <!--Used in the topics fragment-->
+    <string name="doctor_new_topic_title">Title</string>
+    <string name="doctor_new_topic_title_hint">Your topic in one sentence</string>
+    <string name="doctor_new_topic_description">Description</string>
+    <string name="doctor_new_topic_description_hint">Elaborate on your topic</string>
+    <string name="doctor_new_topic_button">Add topic</string>
 
     <!--Activity/Fragment titles-->
     <string name="title_activity_doctor_login">Doctor Log In</string>
@@ -92,6 +99,6 @@
     <string name="title_activity_admin_conference_details">AdminConferenceDetailsActivity</string>
     <string name="title_doctor_fragment_topics">Topics</string>
     <string name="title_doctor_fragment_invites">Invites</string>
-    <string name="title_activity_doctor_new_topic">DoctorNewTopicActivity</string>
+    <string name="title_activity_doctor_new_topic">Add a topic</string>
     <!--************************************End of DOCTOR section******************************* -->
 </resources>
