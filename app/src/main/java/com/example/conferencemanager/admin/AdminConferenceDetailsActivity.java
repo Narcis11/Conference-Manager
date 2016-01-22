@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -250,9 +251,10 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
 
 
     /**********************************************************START OF ASYNC METHODS****************************************************************/
-    private class SaveConferenceDetailsAsync extends AsyncTask<String, Void, Void> {
+    private class SaveConferenceDetailsAsync extends AsyncTask<String, Void, Integer> {
+        final int NO_ROWS_MODIFIED = 101;
         @Override
-        protected Void doInBackground(String... params) {
+        protected Integer doInBackground(String... params) {
             Vector<ContentValues> cVVector = new Vector<>(1);
             ContentValues updateValues = new ContentValues();
 
@@ -272,13 +274,52 @@ public class AdminConferenceDetailsActivity extends AppCompatActivity{
                 cVVector.toArray(cvArray);
                 String querySelection = UsersContract.ConferencesEntry._ID + " = ?";
                 String[] querySelectionArgs = {String.valueOf(mBundle.getInt(Constants.BUNDLE_ADMIN_CONF_ID_KEY))};
-                mContext.getContentResolver().update(UsersContract.ConferencesEntry.CONTENT_URI, cvArray[0], querySelection, querySelectionArgs);
+                return mContext.getContentResolver().update(UsersContract.ConferencesEntry.CONTENT_URI, cvArray[0], querySelection, querySelectionArgs);
             }
-            return null;
+            return NO_ROWS_MODIFIED;
+        }
+
+        @Override
+        protected void onPostExecute(Integer rowsUpdated) {
+            if (rowsUpdated == 0 && rowsUpdated != NO_ROWS_MODIFIED) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminConferenceDetailsActivity.this);
+                builder.setMessage(R.string.admin_edit_conf_error)
+                        .setTitle(R.string.generic_error_occurred)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
         }
     }
 
+    private class DeleteConferenceAsync extends AsyncTask<Void, Void, Integer> {
+        @Override
+        protected Integer doInBackground(Void... params) {
+            String querySelection = UsersContract.ConferencesEntry._ID + " = ?";
+            String[] querySelectionArgs = {String.valueOf(mBundle.getInt(Constants.BUNDLE_ADMIN_CONF_ID_KEY))};
+            return mContext.getContentResolver().delete(UsersContract.ConferencesEntry.CONTENT_URI, querySelection, querySelectionArgs);
+        }
 
+        @Override
+        protected void onPostExecute(Integer rowsDeleted) {
+            if (rowsDeleted == 1) {
+                //open the main activity
+                Intent mainActivityIntent = new Intent(AdminConferenceDetailsActivity.this, AdminMainActivity.class);
+                //clear the intent stack so that the user can't return to this activity
+                mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(mainActivityIntent);
+            }
+            else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminConferenceDetailsActivity.this);
+                builder.setMessage(R.string.admin_delete_conf_error)
+                        .setTitle(R.string.generic_error_occurred)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        }
+    }
 
     /**********************************************************END OF ASYNC METHODS****************************************************************/
 }

@@ -11,7 +11,7 @@
     <string name="signup_button">Sign up</string>
     <string name="no_input">Please complete the field above.</string>
     <string name="invalid_login">Invalid login credentials</string>
-    <string name="generic_error_occurred">An error occurred. Please try again.</string>
+    <string name="generic_error_occurred">An error occurred.</string>
     <string name="signup_user_check">Checking username availability&#8230;</string>
     <string name="signup_user_exists">This username is already registered.</string>
     <string name="signup_user_failed">Failed to create the new user.</string>
@@ -50,6 +50,8 @@
     <string name="admin_delete_conf">Delete conference</string>
     <string name="admin_delete_conf_confirm">Wait a moment</string>
     <string name="admin_delete_conf_dialog_body">Are you sure you want to delete this conference?</string>
+    <string name="admin_delete_conf_error">Unable to delete this conference. Please try again later.</string>
+    <string name="admin_edit_conf_error">Unable to edit this conference. Please try again later.</string>
     <!--Activity/framgment titles-->
     <string name="title_activity_admin_login">Admin Log In</string>
     <string name="title_activity_admin_sign_up">Admin Sign Up</string>
